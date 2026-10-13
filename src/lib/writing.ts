@@ -26,12 +26,7 @@ export function compareWritingItems(a: WritingItem, b: WritingItem): number {
 }
 
 function externalSource(url: string): string {
-  const hostname = new URL(url).hostname.replace(/^www\./, '');
-
-  if (hostname === 'promptfoo.dev') return 'Promptfoo';
-  if (hostname === 'linkedin.com') return 'LinkedIn';
-
-  return hostname;
+  return new URL(url).hostname.replace(/^www\./, '');
 }
 
 /** Published on-site posts and selected external writing, newest first. */

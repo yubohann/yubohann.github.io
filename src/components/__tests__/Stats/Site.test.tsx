@@ -67,7 +67,7 @@ describe('Site', () => {
     await Site();
 
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.github.com/repos/mldangelo/personal-site',
+      'https://api.github.com/repos/yubohann/yubohann.github.io',
       expect.objectContaining({
         headers: expect.objectContaining({
           Accept: 'application/vnd.github.v3+json',
@@ -80,7 +80,7 @@ describe('Site', () => {
     vi.stubEnv('GITHUB_TOKEN', 'test-read-only-token');
     await Site();
     expect(fetchMock).toHaveBeenCalledWith(
-      'https://api.github.com/repos/mldangelo/personal-site',
+      'https://api.github.com/repos/yubohann/yubohann.github.io',
       expect.objectContaining({
         headers: expect.objectContaining({
           Authorization: 'Bearer test-read-only-token',
@@ -108,14 +108,14 @@ describe('Site', () => {
     expect(row?.textContent).toContain('2024-06-01');
     expect(row?.querySelector('a')).toHaveAttribute(
       'href',
-      'https://github.com/mldangelo/personal-site/activity',
+      'https://github.com/yubohann/yubohann.github.io/activity',
     );
   });
 
   it('reports the exact commit this output was built from', async () => {
     const sha = '0123456789abcdef0123456789abcdef01234567';
     process.env.BUILD_SHA = sha;
-    process.env.BUILD_REPOSITORY = 'mldangelo/personal-site';
+    process.env.BUILD_REPOSITORY = 'yubohann/yubohann.github.io';
 
     render(await Site());
 
@@ -123,7 +123,7 @@ describe('Site', () => {
     expect(row?.textContent).toContain('0123456');
     expect(row?.querySelector('a')).toHaveAttribute(
       'href',
-      `https://github.com/mldangelo/personal-site/commit/${sha}`,
+      `https://github.com/yubohann/yubohann.github.io/commit/${sha}`,
     );
     expect(screen.queryByText('Deployed from commit')).not.toBeInTheDocument();
   });
@@ -166,9 +166,14 @@ describe('Site', () => {
 
     render(await Site());
 
-    const note = screen.getByText(/fallback refreshed july 31, 2026/i);
+    const note = screen.getByText(/fallback refreshed october 14, 2026/i);
     expect(note).toHaveAttribute('data-source', 'fallback');
-    expect(screen.getByText('21')).toBeInTheDocument();
+    expect(
+      screen
+        .getByText('Stars this repository has on GitHub')
+        .closest('tr')
+        ?.querySelector('.stat-table-value'),
+    ).toHaveTextContent(/^0$/);
   });
 
   it.each([
@@ -214,16 +219,17 @@ describe('Site', () => {
       fetchMock.mockResolvedValueOnce({ ok: true, json: async () => payload });
       render(await Site());
       expect(
-        screen.getByText(/fallback refreshed july 31, 2026/i),
+        screen.getByText(/fallback refreshed october 14, 2026/i),
       ).toHaveAttribute('data-source', 'fallback');
       expect(
         screen.getByText('Latest repository push (UTC)').closest('tr'),
-      ).toHaveTextContent('2026-07-31');
+      ).toHaveTextContent('2026-10-14');
       expect(
         screen
           .getByText('Number of people watching this repository')
-          .closest('tr'),
-      ).toHaveTextContent('23');
+          .closest('tr')
+          ?.querySelector('.stat-table-value'),
+      ).toHaveTextContent(/^0$/);
       expect(screen.getByText('Built on (UTC)')).toBeInTheDocument();
     },
   );
@@ -273,7 +279,9 @@ describe('Site', () => {
     render(await Site());
 
     expect(
-      screen.getByText(/github readings describe mldangelo\/personal-site/i),
+      screen.getByText(
+        /github readings describe yubohann\/yubohann\.github\.io/i,
+      ),
     ).toHaveAttribute('data-source', 'github');
   });
 

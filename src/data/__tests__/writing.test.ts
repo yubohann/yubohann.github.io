@@ -5,7 +5,9 @@ import writing from '../writing';
 describe('writing data', () => {
   it('exports an array of writing items', () => {
     expect(Array.isArray(writing)).toBe(true);
-    expect(writing.length).toBeGreaterThan(0);
+    // Empty until an external article exists; on-site posts carry the writing
+    // index on their own and are tested through `getWritingItems`.
+    expect(writing).toEqual([]);
   });
 
   it('each item has required properties', () => {

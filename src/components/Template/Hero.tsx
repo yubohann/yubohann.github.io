@@ -9,33 +9,30 @@ export default function Hero() {
     <section className="hero">
       <div className="hero-grid">
         <div className="hero-primary">
-          <p className="hero-kicker">Software &amp; security</p>
+          <p className="hero-kicker">Robotics &amp; embodied AI</p>
           <h1 className="hero-title">
             <span className="hero-name">{profile.name}</span>
           </h1>
           <p className="hero-tagline">
             I&apos;m a {profile.role} at{' '}
-            <a href="https://openai.com" className="hero-highlight">
+            <a href="https://www.hbut.edu.cn" className="hero-highlight">
               {profile.employer}
             </a>
-            , working on{' '}
-            <a href="https://promptfoo.dev" className="hero-highlight">
-              Promptfoo
-            </a>{' '}
-            and{' '}
+            , building multi-agent robot systems and a{' '}
             <a
-              href="https://openai.com/index/codex-security-now-in-research-preview/"
+              href="https://github.com/yubohann/AerialSoftArm"
               className="hero-highlight"
             >
-              Codex Security
+              sim-to-real aerial manipulator
             </a>
             .
           </p>
 
           <p className="hero-summary">
-            I help secure AI systems and use AI to find software
-            vulnerabilities. I co-founded Promptfoo before it joined OpenAI in
-            2026.
+            My work spans physics-grounded search benchmarks in Isaac Sim, graph
+            reinforcement learning for multi-robot navigation, world models, and
+            a rigid-soft arm that grasps by bending. I&apos;m seeking internship
+            and research roles in robotics and embodied AI.
           </p>
 
           <div className="hero-cta">

@@ -37,28 +37,19 @@ describe('Personal', () => {
     expect(screen.getByText('Current age')).toBeInTheDocument();
   });
 
-  it('displays countries visited', () => {
-    render(<Personal />);
-
-    expect(screen.getByText('Countries visited')).toBeInTheDocument();
-    expect(screen.getByText('53')).toBeInTheDocument();
-  });
-
   it('displays current city', () => {
     render(<Personal />);
 
     expect(screen.getByText('Current city')).toBeInTheDocument();
-    expect(screen.getByText('New York, NY')).toBeInTheDocument();
+    expect(screen.getByText('Wuhan, China')).toBeInTheDocument();
   });
 
-  it('has a link for countries visited', () => {
+  it('links only rows that have a real destination', () => {
     render(<Personal />);
 
-    const link = screen.getByRole('link', { name: /53/i });
-    expect(link).toHaveAttribute(
-      'href',
-      'https://www.google.com/maps/d/embed?mid=1iBBTscqateQ93pWFVfHCUZXoDu8&z=2',
-    );
+    // Neither the age nor the city row points at an external source, so the
+    // table ships no links rather than decorative ones.
+    expect(screen.queryAllByRole('link')).toHaveLength(0);
   });
 
   it('ships a real age to readers with no JavaScript', () => {
@@ -92,7 +83,7 @@ describe('Personal', () => {
       (mark) => mark.getAttribute('data-source'),
     );
 
-    expect(sources).toEqual(['profile', 'profile', 'profile']);
+    expect(sources).toEqual(['profile', 'profile']);
   });
 
   it('carries the source note this table used to lack', () => {
@@ -110,15 +101,5 @@ describe('Personal', () => {
     expect(screen.getByText(/profile readings come from/i).textContent).toMatch(
       /without javascript/i,
     );
-  });
-
-  it('does not append a unit that repeats its label', () => {
-    // `53 countries` beside `Countries visited` says nothing the label has
-    // not already said.
-    render(<Personal />);
-
-    const row = screen.getByText('Countries visited').closest('tr');
-
-    expect(row?.textContent).not.toMatch(/countries$/i);
   });
 });

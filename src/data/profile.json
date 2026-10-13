@@ -1,11 +1,9 @@
 {
-  "name": "Michael D'Angelo",
-  "role": "Member of the Technical Staff",
-  "employer": "OpenAI",
-  "focus": "Promptfoo and Codex Security",
-  "birthDate": "1990-02-05T09:24:00-05:00",
-  "computingSince": 1993,
-  "countriesVisited": 53,
-  "currentCity": "New York, NY",
-  "email": "hi@mldangelo.com"
+  "name": "Bohan Yu",
+  "role": "Computer Science undergraduate",
+  "employer": "Hubei University of Technology",
+  "focus": "multi-agent robotics and embodied AI",
+  "birthDate": "2005-08-01T09:00:00+08:00",
+  "currentCity": "Wuhan, China",
+  "email": "2311311120@hbut.edu.cn"
 }

@@ -7,21 +7,21 @@ import Course from '../../Resume/Courses/Course';
 const mockCourses = [
   {
     title: 'Machine Learning',
-    number: 'CS 229',
-    link: 'http://cs229.stanford.edu/',
-    university: 'Stanford',
+    number: '04',
+    link: 'https://www.hbut.edu.cn',
+    university: 'Hubei University of Technology',
   },
   {
-    title: 'Deep Learning',
-    number: 'CS 230',
-    link: 'http://cs230.stanford.edu/',
-    university: 'Stanford',
+    title: 'Computer Vision',
+    number: '05',
+    link: 'https://www.hbut.edu.cn',
+    university: 'Hubei University of Technology',
   },
   {
     title: 'Algorithms',
-    number: 'CS 161',
-    link: 'http://cs161.stanford.edu/',
-    university: 'MIT',
+    number: '02',
+    link: 'https://www.whu.edu.cn',
+    university: 'Wuhan University',
   },
 ];
 
@@ -38,16 +38,16 @@ describe('Courses', () => {
     render(<Courses data={mockCourses} />);
 
     expect(screen.getByText('Machine Learning')).toBeInTheDocument();
-    expect(screen.getByText('Deep Learning')).toBeInTheDocument();
+    expect(screen.getByText('Computer Vision')).toBeInTheDocument();
     expect(screen.getByText('Algorithms')).toBeInTheDocument();
   });
 
   it('renders course numbers', () => {
     render(<Courses data={mockCourses} />);
 
-    expect(screen.getByText(/CS 229/)).toBeInTheDocument();
-    expect(screen.getByText(/CS 230/)).toBeInTheDocument();
-    expect(screen.getByText(/CS 161/)).toBeInTheDocument();
+    expect(screen.getByText(/04/)).toBeInTheDocument();
+    expect(screen.getByText(/05/)).toBeInTheDocument();
+    expect(screen.getByText(/02/)).toBeInTheDocument();
   });
 
   it('renders courses as list items', () => {
@@ -66,10 +66,11 @@ describe('Courses', () => {
     render(<Courses data={unsortedCourses} />);
 
     const items = screen.getAllByRole('listitem');
+    // Descending by university, ascending by number within a school.
     expect(items.map((item) => item.textContent)).toEqual([
-      'CS 229:Machine Learning',
-      'CS 230:Deep Learning',
-      'CS 161:Algorithms',
+      '02:Algorithms',
+      '04:Machine Learning',
+      '05:Computer Vision',
     ]);
   });
 
@@ -92,15 +93,15 @@ describe('Courses', () => {
 describe('Course', () => {
   const mockCourse = {
     title: 'Machine Learning',
-    number: 'CS 229',
-    link: 'http://cs229.stanford.edu/',
-    university: 'Stanford',
+    number: '04',
+    link: 'https://www.hbut.edu.cn',
+    university: 'Hubei University of Technology',
   };
 
   it('renders course number and title', () => {
     render(<Course data={mockCourse} />);
 
-    expect(screen.getByText(/CS 229/)).toBeInTheDocument();
+    expect(screen.getByText(/04/)).toBeInTheDocument();
     expect(screen.getByText('Machine Learning')).toBeInTheDocument();
   });
 

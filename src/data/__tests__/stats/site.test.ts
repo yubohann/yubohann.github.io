@@ -52,7 +52,7 @@ describe('site stats data', () => {
 
     expect(pushedAt!.label).toBe('Latest repository push (UTC)');
     expect(pushedAt!.link).toBe(
-      'https://github.com/mldangelo/personal-site/activity',
+      'https://github.com/yubohann/yubohann.github.io/activity',
     );
     expect(pushedAt!.format!('2024-01-15T00:30:00Z')).toBe('2024-01-15');
     expect(

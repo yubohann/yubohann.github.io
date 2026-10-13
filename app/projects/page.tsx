@@ -93,7 +93,8 @@ export default function ProjectsPage() {
             </span>
           </div>
           <p className="projects-group-note">
-            Student projects, hackathons, and experiments, kept for the record.
+            Coursework, learning notes, and earlier systems work, kept for the
+            record.
           </p>
           <ol className="projects-grid">
             {archive.map((project) => (

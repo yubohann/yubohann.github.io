@@ -123,15 +123,15 @@ describe('buildIdentity', () => {
     clearBuildEnvironment();
     const sha = '0123456789abcdef0123456789abcdef01234567';
     process.env.BUILD_SHA = sha;
-    process.env.BUILD_REPOSITORY = 'mldangelo/personal-site';
+    process.env.BUILD_REPOSITORY = 'yubohann/yubohann.github.io';
 
     expect(buildIdentity()).toEqual({
-      repository: 'mldangelo/personal-site',
+      repository: 'yubohann/yubohann.github.io',
       sha,
     });
     expect(builtCommit()).toBe(sha);
     expect(builtCommitUrl(sha)).toBe(
-      `https://github.com/mldangelo/personal-site/commit/${sha}`,
+      `https://github.com/yubohann/yubohann.github.io/commit/${sha}`,
     );
     expect(sha.slice(0, SHORT_SHA_LENGTH)).toBe('0123456');
   });
@@ -181,7 +181,7 @@ describe('buildIdentity', () => {
   it('will not link a different valid-looking SHA', () => {
     clearBuildEnvironment();
     process.env.BUILD_SHA = 'a'.repeat(40);
-    process.env.BUILD_REPOSITORY = 'mldangelo/personal-site';
+    process.env.BUILD_REPOSITORY = 'yubohann/yubohann.github.io';
 
     expect(() => builtCommitUrl('b'.repeat(40))).toThrow(
       /outside the current build identity/i,

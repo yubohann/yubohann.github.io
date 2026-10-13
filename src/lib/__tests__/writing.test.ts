@@ -11,7 +11,9 @@ describe('getWritingItems', () => {
     const items = getWritingItems();
 
     expect(items.some((item) => !item.isExternal)).toBe(true);
-    expect(items.some((item) => item.isExternal)).toBe(true);
+    // The external list is empty until an off-site article exists; the merge
+    // must still work when only one source has content.
+    expect(items.some((item) => item.isExternal)).toBe(false);
 
     const dated = items.filter((item) => item.date);
     expect(

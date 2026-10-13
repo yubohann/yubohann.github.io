@@ -7,7 +7,7 @@ import {
   utcDate,
 } from '@/lib/telemetry';
 
-const REPOSITORY = 'https://github.com/mldangelo/personal-site';
+const REPOSITORY = 'https://github.com/yubohann/yubohann.github.io';
 
 /**
  * Keys are filled by `src/components/Stats/Site.tsx`. GitHub rows describe the
@@ -38,7 +38,7 @@ const data: StatDeclaration[] = [
     label: 'Open GitHub issues and pull requests',
     key: 'open_issues_count',
     source: 'github',
-    link: 'https://github.com/search?q=repo%3Amldangelo%2Fpersonal-site+is%3Aopen&type=issues',
+    link: 'https://github.com/search?q=repo%3Ayubohann%2Fyubohann.github.io+is%3Aopen&type=issues',
   },
   {
     // `pushed_at` is repository activity, not deployment provenance.

@@ -202,50 +202,33 @@ describe('print: resume link data', () => {
   });
 
   it.each([
-    ['Arthena', 'https://www.ycombinator.com/companies/arthena'],
     [
-      'Planetary Resources',
-      'https://en.wikipedia.org/wiki/Planetary_Resources',
+      'Independent Research',
+      'https://github.com/yubohann/MultiAgent-Robotics-Portfolio',
     ],
-  ])('uses a stable destination for retired company %s', (name, expected) => {
+    [
+      'ROBOCON Robotics Team',
+      'https://github.com/yubohann/MultiAgent-Robotics-Portfolio/tree/main/robocon-mid360-autonomy-stack',
+    ],
+  ])('uses a stable destination for %s', (name, expected) => {
     expect(work.find((position) => position.name === name)?.url).toBe(expected);
   });
 
-  it.each([
-    [
-      'CME 302',
-      'Numerical Linear Algebra',
-      'https://bulletin.stanford.edu/courses/1057521',
-    ],
-    [
-      'CME 306',
-      'Computational Methods of Applied Mathematics',
-      'https://bulletin.stanford.edu/courses/1174062',
-    ],
-    [
-      'CME 308',
-      'Stochastic Methods in Engineering',
-      'https://web.stanford.edu/class/cme308/',
-    ],
-    [
-      'CS 265',
-      'Randomized Algorithms and Probabilistic Analysis',
-      'https://web.stanford.edu/class/cs265/',
-    ],
-  ])('keeps %s aligned with Stanford records', (number, title, link) => {
-    expect(courses.find((course) => course.number === number)).toMatchObject({
-      title,
-      link,
-    });
+  it('files every course under the degree that owns it', () => {
+    // The join `resumeJson.ts` performs is exact, so a course naming a school
+    // the degree list does not carry would silently drop from /resume.json.
+    const schools = new Set(degrees.map((degree) => degree.school));
+
+    for (const course of courses) {
+      expect(schools.has(course.university), course.title).toBe(true);
+    }
   });
 
-  it('uses canonical HTTPS company URLs where the site publishes one', () => {
-    expect(work.find((position) => position.name === 'Smile ID')?.url).toBe(
-      'https://smile.id',
-    );
+  it('uses canonical HTTPS URLs for the current role and the school', () => {
     expect(
-      work.find((position) => position.name === 'Skeptical Investments')?.url,
-    ).toBe('https://skepticalinvestments.biz');
+      work.find((position) => position.name === 'Independent Research')?.url,
+    ).toBe('https://github.com/yubohann/MultiAgent-Robotics-Portfolio');
+    expect(degrees[0]?.link).toBe('https://www.hbut.edu.cn');
   });
 });
 
@@ -261,14 +244,13 @@ describe('print: contact block', () => {
     return block as HTMLElement;
   }
 
-  it('carries location, site, email, GitHub and LinkedIn', () => {
+  it('carries location, site, email and GitHub', () => {
     const text = contactBlock().textContent ?? '';
 
     expect(text).toContain(profile.currentCity);
     expect(text).toContain(profile.email);
-    expect(text).toContain('mldangelo.com');
-    expect(text).toContain('github.com/mldangelo');
-    expect(text).toContain('linkedin.com/in/');
+    expect(text).toContain('yubohann.github.io');
+    expect(text).toContain('github.com/yubohann');
   });
 
   it('links to the same destinations the footer does', () => {
@@ -278,7 +260,7 @@ describe('print: contact block', () => {
       a.getAttribute('href'),
     );
 
-    for (const id of ['github', 'linkedin'] as const) {
+    for (const id of ['github'] as const) {
       const expected = contact.find((entry) => entry.id === id)?.link;
 
       expect(expected).toBeTruthy();
@@ -295,7 +277,7 @@ describe('print: contact block', () => {
       rule.selectors.includes('.resume-print-contact > *'),
     );
 
-    expect(block.children).toHaveLength(5);
+    expect(block.children).toHaveLength(4);
     expect(block.querySelector('[aria-hidden="true"]')).toBeNull();
 
     // A separator carried inside an entry lands wherever that entry lands, so

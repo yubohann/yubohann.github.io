@@ -230,7 +230,9 @@ function buildWork(): ResumeWork[] {
 function splitDegree(
   degree: string,
 ): Pick<ResumeEducation, 'studyType' | 'area'> {
-  const match = degree.match(/^((?:[A-Z]\.){2,3})\s+(.+)$/);
+  // Repetitions may carry lowercase letters ("B.Eng."), not only single
+  // capitals ("M.S."), so the abbreviation run accepts both.
+  const match = degree.match(/^((?:[A-Z][A-Za-z]*\.){2,3})\s+(.+)$/);
   return match ? { studyType: match[1], area: match[2] } : { area: degree };
 }
 
@@ -239,8 +241,8 @@ function buildEducation(): ResumeEducation[] {
     // Every course carries the university it was taken at; attach it to the
     // degree from that school instead of listing courses in a section the
     // schema has no room for. Matched whole rather than by containment: a
-    // substring test attaches every Stanford course to a second degree from a
-    // school whose name merely contains "Stanford", publishing the same
+    // substring test attaches every course to a second degree from a school
+    // whose name merely contains the first one's, publishing the same
     // coursework twice.
     const schoolCourses = courses
       .filter((course) => course.university === degree.school)

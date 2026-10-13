@@ -20,7 +20,7 @@ import { AUTHOR_NAME, SITE_URL } from '@/lib/utils';
 
 const resumeMetadata = createPageMetadata({
   title: 'Resume',
-  description: `${AUTHOR_NAME}'s Resume. OpenAI, Promptfoo, Smile ID, Arthena, Matroid, Stanford ICME, YC alum.`,
+  description: `${AUTHOR_NAME}'s Resume. Multi-agent robotics, robot learning, ROS 2, and sim-to-real aerial manipulation.`,
   path: '/resume/',
 });
 
@@ -61,7 +61,6 @@ export default function ResumePage() {
   const now = Date.now();
   const careerSpan = careerSpanYears(work, now);
   const github = contactLink('github');
-  const linkedin = contactLink('linkedin');
 
   return (
     <PageWrapper>
@@ -83,12 +82,13 @@ export default function ResumePage() {
             </a>
           </div>
           <p className="resume-summary">
-            Engineering leader with a career spanning {careerSpan}+ years across
-            AI, security, and infrastructure. I&apos;m currently a Member of the
-            Technical Staff at OpenAI, working on Promptfoo and Codex Security.
-            I help secure AI systems and use AI to find software
-            vulnerabilities. I co-founded Promptfoo before it joined OpenAI in
-            2026. Stanford MS, YC alum, previously VP Engineering.
+            A robotics portfolio spanning {careerSpan}+ years of competition
+            teams, independent research, and engineering internships. I&apos;m a
+            Computer Science undergraduate at Hubei University of Technology,
+            graduating in 2027, building multi-agent search benchmarks, graph
+            reinforcement learning, world models, and a sim-to-real aerial
+            manipulator. First-author manuscript in preparation on multi-robot
+            exploration and geometry-constrained semantic allocation.
           </p>
           {/* Print-only, but real markup rather than CSS `content`, so it is
               selectable and linkable. Destinations come from shared contact
@@ -98,7 +98,6 @@ export default function ResumePage() {
             <a href={`${SITE_URL}/`}>{displayUrl(SITE_URL)}</a>
             <a href={`mailto:${profile.email}`}>{profile.email}</a>
             <a href={github}>{displayUrl(github)}</a>
-            <a href={linkedin}>{displayUrl(linkedin)}</a>
           </address>
         </header>
 

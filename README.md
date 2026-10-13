@@ -1,22 +1,14 @@
-# Michael D'Angelo: Personal Site
+# Bohan Yu: Personal Site
 
-[![Build Status](https://img.shields.io/github/actions/workflow/status/mldangelo/personal-site/node.js.yml?branch=main)](https://github.com/mldangelo/personal-site/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![GitHub Stars](https://img.shields.io/github/stars/mldangelo/personal-site?style=social)](https://github.com/mldangelo/personal-site/stargazers)
-[![GitHub Forks](https://img.shields.io/github/forks/mldangelo/personal-site?style=social)](https://github.com/mldangelo/personal-site/network/members)
+The source for [yubohann.github.io](https://yubohann.github.io), a portfolio,
+résumé, and writing site for my robotics work — multi-agent search benchmarks,
+graph reinforcement learning, world models, and sim-to-real aerial manipulation.
 
-The source for [mldangelo.com](https://mldangelo.com), a portfolio, résumé,
-project archive, and writing site built with
-[Next.js](https://nextjs.org/), [React](https://react.dev/),
-[TypeScript](https://www.typescriptlang.org/), and
-[Tailwind CSS](https://tailwindcss.com/).
+The code home for the projects is
+[MultiAgent-Robotics-Portfolio](https://github.com/yubohann/MultiAgent-Robotics-Portfolio);
+this site is the human-readable layer on top.
 
-The architecture is reusable and MIT licensed. The content and visual design
-are personal, so a fork needs a full rebrand.
-
-**[Visit the live site →](https://mldangelo.com)**
-
-## What is here
+## Stack
 
 - A statically exported Next.js 16 site deployed to GitHub Pages.
 - A responsive light/dark design system built from semantic CSS tokens.
@@ -24,39 +16,7 @@ are personal, so a fork needs a full rebrand.
 - A filterable résumé that still prints in full.
 - Tests for components, content, metadata, and the final static export.
 
-## Get started
-
-### With a coding agent
-
-Open your fork in a coding agent and ask:
-
-```text
-Read AGENTS.md, use the Node version in .nvmrc, install the locked
-dependencies, and start the development server. Do not change the site yet.
-Tell me the local URL and report any setup failure with its exact output.
-```
-
-### Manual setup
-
-With [GitHub CLI](https://cli.github.com/) and
-[nvm](https://github.com/nvm-sh/nvm) installed:
-
-```bash
-gh repo fork mldangelo/personal-site --clone
-cd personal-site
-nvm install
-npm ci
-npm run dev
-```
-
-If you use another version manager, choose a release accepted by `engines.node`
-in `package.json`.
-
-### GitHub Codespaces
-
-1. Click **Fork** at the top of this page.
-2. In your fork, click **Code**, choose **Codespaces**, then create a codespace.
-3. Run:
+## Getting started
 
 ```bash
 nvm install
@@ -64,29 +24,7 @@ npm ci
 npm run dev
 ```
 
-Codespaces provides the tools, so you do not need to install them locally.
-
-## Adapt it with a coding agent
-
-When you are ready to customize the site, give the agent your résumé, profile
-details, links, images, and intended site URL. Try:
-
-```text
-Read AGENTS.md and docs/adapting-guide.md, set up the repository, then rebrand
-this fork for [NAME] with the details and assets I provide. Work on a topic
-branch and preserve the current routes and design unless I say otherwise.
-Inventory the existing posts, external writing, résumé, and projects before
-changing the shared identity. Do not relabel that content as mine. Ask whether
-unmatched personal content should keep its original attribution, be replaced,
-or be removed. Use the guide's reference map to update every identity surface
-and generated asset. Search for remaining upstream details and run the full
-validation suite. Do not commit, push, merge, change GitHub settings, create
-secrets, or modify DNS. Report the external steps that remain.
-```
-
-The **[adapting guide](./docs/adapting-guide.md)** has focused prompts for
-writing, feature removal, visual changes, and deployment, plus a map of the
-files an agent should inspect.
+Open [http://localhost:3000](http://localhost:3000).
 
 ## Commands
 
@@ -100,25 +38,22 @@ npm run build           # Build the production static export
 npm run verify-export   # Inspect the generated HTML and XML
 npm run measure-export  # Weigh the export against scripts/budget.json
 npm run og              # Regenerate the site and per-post share cards
-npm run og:check        # Verify the card ledger and a fresh byte-for-byte render
-npm run og:check:ledger # Verify the ledger alone, with no network access
+npm run icons           # Regenerate the favicon and web app manifest art
 ```
-
-CI checks formatting, linting, types, the share cards, tests, the production
-build, the exported site, and its size against the budget in
-`scripts/budget.json` on every pull request.
 
 ## Deploy
 
-Pushes to `main` deploy the same static build that CI validates. See the
-[adapting guide](./docs/adapting-guide.md#deployment-reference) for URL and
-domain setup.
+Pushes to `main` deploy the static build through GitHub Actions to GitHub
+Pages. The repository must be named `yubohann.github.io` for the root URL, with
+Pages configured to build from GitHub Actions.
 
-## Contributing
+## Credit
 
-See the [contributing guide](./docs/contributing.md) for setup, branch and commit
-conventions, validation, and pull request expectations.
+The design and architecture are adapted from the MIT-licensed
+[personal-site](https://github.com/mldangelo/personal-site) by
+[Michael D'Angelo](https://mldangelo.com). Content, identity, and generated
+art in this repository are mine.
 
 ## License
 
-[MIT](./LICENSE). Use it however you want.
+[MIT](./LICENSE). The upstream copyright notice is retained in `LICENSE`.

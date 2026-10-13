@@ -15,34 +15,32 @@ describe('Hero', () => {
     render(<Hero />);
 
     const heading = screen.getByRole('heading', { level: 1 });
-    expect(heading).toHaveTextContent("Michael D'Angelo");
+    expect(heading).toHaveTextContent('Bohan Yu');
   });
 
-  it('describes the current work and Promptfoo joining OpenAI', () => {
+  it('describes the current work and links the aerial manipulator', () => {
     const { container } = render(<Hero />);
 
-    const openAiLink = screen.getByRole('link', { name: /openai/i });
-    expect(openAiLink).toHaveAttribute('href', 'https://openai.com');
-    expect(openAiLink).toHaveClass('hero-highlight');
-
-    const promptfooLink = screen.getByRole('link', { name: /promptfoo/i });
-    expect(promptfooLink).toHaveAttribute('href', 'https://promptfoo.dev');
-    expect(promptfooLink).toHaveClass('hero-highlight');
-
-    const codexSecurityLink = screen.getByRole('link', {
-      name: 'Codex Security',
+    const universityLink = screen.getByRole('link', {
+      name: /hubei university of technology/i,
     });
-    expect(codexSecurityLink).toHaveAttribute(
+    expect(universityLink).toHaveAttribute('href', 'https://www.hbut.edu.cn');
+    expect(universityLink).toHaveClass('hero-highlight');
+
+    const armLink = screen.getByRole('link', {
+      name: /sim-to-real aerial manipulator/i,
+    });
+    expect(armLink).toHaveAttribute(
       'href',
-      'https://openai.com/index/codex-security-now-in-research-preview/',
+      'https://github.com/yubohann/AerialSoftArm',
     );
-    expect(codexSecurityLink).toHaveClass('hero-highlight');
+    expect(armLink).toHaveClass('hero-highlight');
 
     expect(container.querySelector('.hero-tagline')).toHaveTextContent(
-      "I'm a Member of the Technical Staff at OpenAI, working on Promptfoo and Codex Security.",
+      "I'm a Computer Science undergraduate at Hubei University of Technology, building multi-agent robot systems and a sim-to-real aerial manipulator.",
     );
     expect(container.querySelector('.hero-summary')).toHaveTextContent(
-      'I help secure AI systems and use AI to find software vulnerabilities. I co-founded Promptfoo before it joined OpenAI in 2026.',
+      'My work spans physics-grounded search benchmarks in Isaac Sim',
     );
   });
 
@@ -55,7 +53,6 @@ describe('Hero', () => {
     expect(screen.queryByText('Computing since')).not.toBeInTheDocument();
     expect(screen.queryByText('Based in')).not.toBeInTheDocument();
     expect(screen.queryByText('YC Alum')).not.toBeInTheDocument();
-    expect(screen.queryByText('Stanford ICME')).not.toBeInTheDocument();
   });
 
   it('renders one primary CTA and one quieter resume link', () => {

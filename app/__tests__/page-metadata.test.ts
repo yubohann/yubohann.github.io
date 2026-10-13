@@ -11,7 +11,6 @@ import {
   SHARE_IMAGE_DIMENSIONS,
   SHARE_IMAGE_PATH,
   SITE_URL,
-  TWITTER_HANDLE,
 } from '@/lib/utils';
 import { metadata as aboutMetadata } from '../about/page';
 import { metadata as contactMetadata } from '../contact/page';
@@ -163,11 +162,13 @@ describe('page metadata', () => {
 
     expect(metadata.openGraph?.siteName).toBe(sharedOpenGraph?.siteName);
     expect(metadata.openGraph).toMatchObject({ locale: 'en_US' });
+    // No social handle is configured, so the card fields must survive without
+    // one rather than shipping empty `twitter:site` values.
     expect(metadata.twitter).toMatchObject({
       card: 'summary_large_image',
-      site: TWITTER_HANDLE,
-      creator: TWITTER_HANDLE,
     });
+    expect(metadata.twitter).not.toHaveProperty('site');
+    expect(metadata.twitter).not.toHaveProperty('creator');
   });
 
   it('overrides 404 share metadata without inventing a canonical url', () => {

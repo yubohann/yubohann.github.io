@@ -160,8 +160,8 @@ describe('projects data', () => {
   /**
    * A shipped entry that names a résumé role must agree with that internal
    * record. This is a consistency gate, not proof of external truth or link
-   * health. A project may outlive the job — Promptfoo is still being built at
-   * OpenAI — so only a declared project end date is compared.
+   * health. A project may outlive the role that started it, so only a
+   * declared project end date is compared.
    */
   describe('agreement with the résumé', () => {
     const byName = new Map(work.map((position) => [position.name, position]));
@@ -179,19 +179,31 @@ describe('projects data', () => {
       }
     });
 
-    it('starts and ends when the résumé says it did', () => {
+    /**
+     * Research projects start and end inside the tenure of the role that
+     * backs them, rather than matching its dates exactly: one research role
+     * can carry several projects that begin and finish at different times.
+     */
+    it('places every project inside its résumé role span', () => {
       for (const { project, position } of sourced) {
-        expect(project.date, project.title).toBe(position?.startDate);
-        if (project.endDate) {
-          expect(project.endDate, project.title).toBe(position?.endDate);
+        expect(position, project.title).toBeDefined();
+        expect(
+          project.date >= (position?.startDate ?? ''),
+          `${project.title}: starts before ${position?.name}`,
+        ).toBe(true);
+        if (project.endDate && position?.endDate) {
+          expect(
+            project.endDate <= position.endDate,
+            `${project.title}: ends after ${position.name}`,
+          ).toBe(true);
         }
       }
     });
 
     it('keeps same-name project and résumé destinations aligned', () => {
       for (const { project, position } of sourced) {
-        // Codex Security is backed by the OpenAI role but intentionally links
-        // to the product announcement rather than OpenAI's home page.
+        // Entries whose title matches the backing role exactly must link to
+        // the same destination; named projects intentionally link deeper.
         if (project.title !== project.sourceWork) continue;
         expect(project.link, project.title).toBe(position?.url);
       }
@@ -225,36 +237,34 @@ describe('projects data', () => {
     });
   });
 
-  it('distinguishes Promptfoo project continuity from the founding role', () => {
-    const promptfoo = projects.find((project) => project.title === 'Promptfoo');
-    const role = work.find((position) => position.name === 'Promptfoo');
+  it('keeps the aerial manipulator linked to its standalone repository', () => {
+    const arm = projects.find((project) => project.title === 'AerialSoftArm');
 
-    expect(promptfoo?.ongoing).toBe(true);
-    expect(promptfoo?.subtitle).toMatch(/through acquisition/i);
-    expect(promptfoo?.subtitle).toMatch(/continued at OpenAI/i);
-    expect(role?.endDate).toBe('2026-03-09');
+    expect(arm?.ongoing).toBe(true);
+    expect(arm?.link).toBe('https://github.com/yubohann/AerialSoftArm');
+    expect(arm?.sourceWork).toBe('Independent Research');
   });
 
-  it('keeps reviewed destination and chronology corrections in place', () => {
-    const arthena = projects.find((project) => project.title === 'Arthena');
-    const spacePotato = projects.find(
-      (project) => project.title === 'Space Potato',
+  it('keeps reviewed destination corrections in place', () => {
+    const robocon = projects.find(
+      (project) => project.title === 'Robocon MID-360 Autonomy Stack',
     );
-    const catDetector = projects.find(
-      (project) => project.title === 'Cat Detector',
+    const ros2Notes = projects.find(
+      (project) => project.title === 'ROS 2 Notes',
     );
 
-    expect(arthena?.link).toBe('https://www.ycombinator.com/companies/arthena');
-    expect(spacePotato?.link).toBeUndefined();
-    expect(catDetector?.tech).not.toContain('TensorFlow');
+    expect(robocon?.link).toBe(
+      'https://github.com/yubohann/MultiAgent-Robotics-Portfolio/tree/main/robocon-mid360-autonomy-stack',
+    );
+    expect(ros2Notes?.sourceWork).toBeUndefined();
   });
 
   it('uses established brand and technology capitalization', () => {
-    const harvest = projects.find((project) => project.title === 'Harvest');
-    const arthena = projects.find((project) => project.title === 'Arthena');
+    const arm = projects.find((project) => project.title === 'AerialSoftArm');
+    const rivermark = projects.find((project) => project.title === 'Rivermark');
 
-    expect(harvest?.subtitle).toContain('TechCrunch');
-    expect(harvest?.tech).toContain('Computer vision');
-    expect(arthena?.tech).toContain('Microservices');
+    expect(arm?.tech).toContain('Isaac Lab');
+    expect(arm?.tech).toContain('MuJoCo');
+    expect(rivermark?.tech).toContain('Isaac Sim');
   });
 });

@@ -11,9 +11,9 @@ describe('feed.xml route', () => {
     const xml = await response.text();
 
     expect(xml).toContain(`${SITE_URL}/writing/`);
-    expect(xml).toContain(`${SITE_URL}/writing/claude-code-outage/`);
-    expect(xml).toContain(`${SITE_URL}/writing/eurostar-chatbot-analysis/`);
-    expect(xml).toContain(`${SITE_URL}/writing/shipping-with-claude-code/`);
+    expect(xml).toContain(
+      `${SITE_URL}/writing/starting-a-site-for-my-robotics-work/`,
+    );
   });
 
   it('keeps the feed self link file-like', async () => {

@@ -90,9 +90,16 @@ describe('EmailLink', () => {
 
       // The flash is a *jump* to the complete address from some other alias
       // already several characters long. Looping re-types the address
-      // legitimately, but that grows "h" -> "hi", so the previous frame is a
-      // single character and this guard leaves it alone.
-      if (previous.length > 1 && previous !== localPart) {
+      // legitimately, and that path grows through prefixes of the address —
+      // so a previous frame that is a proper prefix of the local part is a
+      // typing step, not a snap back. The local part here is long enough
+      // (ten digits) that its completion frame would otherwise read as a
+      // flash; an alias can never be a prefix of it.
+      if (
+        previous.length > 1 &&
+        previous !== localPart &&
+        !localPart.startsWith(previous)
+      ) {
         expect(shown).not.toBe(localPart);
       }
 

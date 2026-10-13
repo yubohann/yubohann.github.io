@@ -123,7 +123,7 @@ describe('json resume document', () => {
   });
 
   it('splits the display city into city and region without asserting a country', () => {
-    expect(resume.basics.location).toEqual({ city: 'New York', region: 'NY' });
+    expect(resume.basics.location).toEqual({ city: 'Wuhan', region: 'China' });
   });
 
   it('lists every non-email contact as a profile with its handle', () => {
@@ -132,13 +132,8 @@ describe('json resume document', () => {
     expect(resume.basics.profiles).toHaveLength(socials.length);
     expect(resume.basics.profiles).toContainEqual({
       network: 'GitHub',
-      username: 'mldangelo',
-      url: 'https://github.com/mldangelo',
-    });
-    expect(resume.basics.profiles).toContainEqual({
-      network: 'LinkedIn',
-      username: 'michaelldangelo',
-      url: 'https://www.linkedin.com/in/michaelldangelo',
+      username: 'yubohann',
+      url: 'https://github.com/yubohann',
     });
     expect(
       resume.basics.profiles.every((entry) => entry.username.length > 0),
@@ -150,7 +145,7 @@ describe('json resume document', () => {
       sortPositions(work).map((position) => position.name),
     );
     expect(resume.work[0]).toMatchObject({
-      name: 'OpenAI',
+      name: 'Independent Research',
       position: work[0].position,
       url: work[0].url,
       startDate: work[0].startDate,
@@ -159,18 +154,15 @@ describe('json resume document', () => {
 
   it('omits endDate for the current role rather than inventing one', () => {
     expect(resume.work[0]).not.toHaveProperty('endDate');
-    expect(resume.work[1].endDate).toBe('2026-03-09');
+    expect(resume.work[1].endDate).toBe('2026-07-31');
   });
 
   it('reduces summaries carrying inline anchors to plain text', () => {
-    expect(resume.work[0].summary).toBe(
-      'Building Promptfoo and Codex Security at OpenAI, with a focus on securing AI systems and applying AI to software security.',
+    expect(resume.work[0].summary).toContain(
+      'The project code ships in the public portfolio repository.',
     );
-
-    const arthena = resume.work.find((position) => position.name === 'Arthena');
-    expect(arthena?.summary).toContain(
-      'backed by Anthemis, Foundation Capital, and Y Combinator',
-    );
+    expect(resume.work[0].summary).not.toContain('<a');
+    expect(resume.work[0].summary).not.toContain('href');
   });
 
   it('leaves no markup or uncollapsed whitespace anywhere in the prose', () => {
@@ -200,35 +192,24 @@ describe('json resume document', () => {
   it('splits the degree string into studyType and area', () => {
     expect(resume.education).toHaveLength(degrees.length);
     expect(resume.education[0]).toMatchObject({
-      institution: 'Stanford University',
-      url: 'https://stanford.edu',
-      studyType: 'M.S.',
-      area: 'Computational and Mathematical Engineering (ICME)',
-      endDate: '2016',
-    });
-    expect(resume.education[1]).toMatchObject({
-      institution: 'University at Buffalo',
-      studyType: 'B.S.',
-      area: 'Electrical Engineering, Computer Engineering',
-      endDate: '2012',
+      institution: 'Hubei University of Technology',
+      url: 'https://www.hbut.edu.cn',
+      studyType: 'B.Eng.',
+      area: 'Computer Science and Technology',
+      endDate: '2027',
     });
   });
 
   it('files coursework under the school it was taken at', () => {
     expect(resume.education[0].courses).toHaveLength(courses.length);
-    expect(resume.education[0].courses).toContain(
-      'EE 364a - Convex Optimization',
-    );
-    // Every course in the data is a Stanford course, so Buffalo carries none
-    // rather than an empty array.
-    expect(resume.education[1]).not.toHaveProperty('courses');
+    expect(resume.education[0].courses).toContain('01 - C Programming');
   });
 
   it('files each course under exactly one degree', async () => {
     // Cardinality across the whole document, not per entry: attaching courses
-    // by substring containment published all 13 Stanford courses under every
-    // degree whose school name merely contained "Stanford", and the per-entry
-    // assertions above never looked at the extra entry. A second school with a
+    // by substring containment would publish every course under any degree
+    // whose school name merely contained the first's, and the per-entry
+    // assertions above never look at the extra entry. A second school with a
     // superstring name is the case the current data cannot express.
     expect(
       resume.education.flatMap((entry) => entry.courses ?? []),
@@ -239,10 +220,10 @@ describe('json resume document', () => {
       default: [
         ...degrees,
         {
-          school: 'Stanford University Graduate School of Business',
-          degree: 'M.B.A.',
-          link: 'https://gsb.stanford.edu',
-          year: 2018,
+          school: 'Hubei University of Technology International College',
+          degree: 'Exchange Certificate',
+          link: 'https://www.hbut.edu.cn',
+          year: 2028,
         },
       ],
     }));

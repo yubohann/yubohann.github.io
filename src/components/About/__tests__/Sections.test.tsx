@@ -113,8 +113,8 @@ Lead paragraph.
 
     expect(html).toContain('href="#some-history"');
     expect(html).toContain('id="some-history"');
-    expect(html).toContain('href="#travel-geography"');
-    expect(html).toContain('id="travel-geography"');
+    expect(html).toContain('href="#what-i-work-on"');
+    expect(html).toContain('id="what-i-work-on"');
   });
 
   it('renders only the history markers stated by the prose', () => {
@@ -124,65 +124,58 @@ Lead paragraph.
       history?.querySelectorAll('.log-entry') ?? [],
     ) as HTMLElement[];
 
-    expect(entries).toHaveLength(15);
+    expect(entries).toHaveLength(5);
     expect(
       entries.map((entry) => ({
         year: entry.querySelector('.log-entry-year')?.textContent ?? null,
         age: entry.querySelector('.log-entry-age')?.textContent ?? null,
       })),
     ).toEqual([
-      { year: '1993', age: 'Age 3' },
-      { year: '1995', age: null },
-      { year: '1996', age: null },
-      { year: null, age: 'Age 7' },
-      { year: null, age: 'Age 8' },
-      { year: null, age: 'Age 10' },
-      { year: null, age: 'Age 11' },
-      { year: null, age: 'Age 12' },
-      { year: null, age: 'Age 13' },
-      { year: null, age: 'Age 14' },
-      { year: null, age: 'Age 14–17' },
-      { year: null, age: 'Age 16' },
-      { year: null, age: 'Age 18' },
-      { year: null, age: 'Age 19' },
-      { year: null, age: 'Age 20' },
+      { year: '2023', age: null },
+      { year: '2024', age: null },
+      { year: '2025', age: null },
+      { year: '2025', age: null },
+      { year: '2026', age: null },
     ]);
 
+    // A leading marker is lifted out, leaving a sentence behind, and the
+    // gutter copy is hidden because the body no longer states it.
+    expect(entries[0].querySelector('.log-entry-body')?.textContent).toMatch(
+      /^I joined the ROBOCON robotics team/,
+    );
+    expect(entries[0].querySelector('.log-entry-marker')).not.toHaveAttribute(
+      'aria-hidden',
+    );
+
     // Embedded markers remain in the prose, including meaningful qualifiers.
-    expect(entries[0].querySelector('.log-entry-body')?.textContent).toContain(
-      'a computer in my bedroom in 1993',
-    );
     expect(entries[2].querySelector('.log-entry-body')?.textContent).toContain(
-      'In the summer of 1996',
+      'In March of 2025',
     );
-    for (const index of [0, 1, 2]) {
+    expect(entries[4].querySelector('.log-entry-body')?.textContent).toContain(
+      'In the summer of 2026',
+    );
+    for (const index of [2, 3, 4]) {
       expect(entries[index].querySelector('.log-entry-marker')).toHaveAttribute(
         'aria-hidden',
         'true',
       );
     }
-
-    // A leading marker is lifted out instead, leaving a sentence behind.
-    expect(entries[3].querySelector('.log-entry-body')?.textContent).toMatch(
-      /^I discovered the mini-games/,
-    );
-    expect(entries[3].querySelector('.log-entry-marker')).not.toHaveAttribute(
-      'aria-hidden',
-    );
   });
 
-  it('leaves an undated entry an empty gutter rather than a broken marker', () => {
+  it('reads a marker for every dated entry, leaving no broken gutters', () => {
     const { container } = render(<AboutContent markdown={aboutMarkdown} />);
     const markers = Array.from(
       container.querySelectorAll('.about-section--log .log-entry-marker'),
     );
     const empty = markers.filter((marker) => marker.textContent === '');
 
-    expect(markers).toHaveLength(26);
-    expect(empty).toHaveLength(3);
+    expect(markers).toHaveLength(5);
+    // Every history entry is dated, so every gutter carries a reading; the
+    // unmarked-entry path is pinned in `logEntry.test.ts`.
+    expect(empty).toHaveLength(0);
 
-    for (const marker of empty) {
-      expect(marker.querySelector('.log-entry-year')).toBeNull();
+    for (const marker of markers) {
+      expect(marker.querySelector('.log-entry-year')).not.toBeNull();
     }
   });
 
@@ -193,30 +186,30 @@ Lead paragraph.
 
     const nav = screen.getByRole('navigation', { name: 'About sections' });
     const navLink = within(nav).getByRole('link', {
-      name: 'Travel / Geography',
+      name: 'What I Work On',
     });
 
     navLink.click();
 
     await waitFor(() => {
-      expect(window.location.hash).toBe('#travel-geography');
+      expect(window.location.hash).toBe('#what-i-work-on');
     });
     expect(document.querySelector(window.location.hash)).toHaveTextContent(
-      'Travel / Geography',
+      'What I Work On',
     );
 
-    const heading = screen.getByRole('heading', { name: 'Fun Facts' });
+    const heading = screen.getByRole('heading', { name: 'I Dream Of' });
     const permalink = within(heading).getByRole('link', {
-      name: 'Fun Facts',
+      name: 'I Dream Of',
     });
 
     permalink.click();
 
     await waitFor(() => {
-      expect(window.location.hash).toBe('#fun-facts');
+      expect(window.location.hash).toBe('#i-dream-of');
     });
     expect(document.querySelector(window.location.hash)).toHaveTextContent(
-      'Fun Facts',
+      'I Dream Of',
     );
   });
 });

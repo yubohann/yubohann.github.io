@@ -29,13 +29,10 @@ describe('personal stats data', () => {
     expect(ageStat!.source).toBe('profile');
   });
 
-  it('has a countries visited stat', () => {
-    const countriesStat = data.find((s) => s.key === 'countries');
+  it('declares only the rows the profile can honestly carry', () => {
+    const keys = data.map((s) => s.key);
 
-    expect(countriesStat).toBeDefined();
-    expect(countriesStat!.label).toBe('Countries visited');
-    expect(countriesStat!.value).toBe(53);
-    expect(countriesStat!.link).toContain('google.com/maps');
+    expect(keys).toEqual(['age', 'location']);
   });
 
   it('has a current location stat', () => {
@@ -43,7 +40,7 @@ describe('personal stats data', () => {
 
     expect(locationStat).toBeDefined();
     expect(locationStat!.label).toBe('Current city');
-    expect(locationStat!.value).toBe('New York, NY');
+    expect(locationStat!.value).toBe('Wuhan, China');
   });
 
   it('stays a plain data module with no React in it', () => {

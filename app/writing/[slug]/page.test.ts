@@ -86,30 +86,30 @@ async function blogPostingFor(slug: string) {
 describe('writing post metadata', () => {
   it('uses a trailing-slash canonical URL for posts', async () => {
     const metadata = await generateMetadata({
-      params: Promise.resolve({ slug: 'claude-code-outage' }),
+      params: Promise.resolve({ slug: 'starting-a-site-for-my-robotics-work' }),
     });
 
     expect(metadata.openGraph?.url).toBe(
-      `${SITE_URL}/writing/claude-code-outage/`,
+      `${SITE_URL}/writing/starting-a-site-for-my-robotics-work/`,
     );
   });
 
   /**
    * The share image is the post's own generated card, even when the post names
-   * an article image. `summary_large_image` wants 1200x630, and a screenshot is
-   * whatever shape it happens to be — this one is 1117x812.
+   * an article image. `summary_large_image` wants 1200x630, and an article
+   * figure is whatever shape it happens to be.
    */
   it('uses the generated post card for social metadata', async () => {
     const metadata = await generateMetadata({
-      params: Promise.resolve({ slug: 'shipping-with-claude-code' }),
+      params: Promise.resolve({ slug: 'starting-a-site-for-my-robotics-work' }),
     });
 
     expect(metadata.openGraph?.images).toEqual([
       {
-        url: `${SITE_URL}/og/writing/shipping-with-claude-code.png`,
+        url: `${SITE_URL}/og/writing/starting-a-site-for-my-robotics-work.png`,
         width: SHARE_IMAGE_DIMENSIONS.width,
         height: SHARE_IMAGE_DIMENSIONS.height,
-        alt: `What I learned shipping 1,000+ PRs with Claude Code — ${AUTHOR_NAME}`,
+        alt: `Starting a site for my robotics work — ${AUTHOR_NAME}`,
       },
     ]);
     expect(metadata.twitter?.images).toEqual(metadata.openGraph?.images);
@@ -138,22 +138,27 @@ describe('writing post structured data', () => {
    * belongs and where its real dimensions are wanted.
    */
   it('keeps an explicitly selected article image in the BlogPosting', async () => {
-    const blogPosting = await blogPostingFor('shipping-with-claude-code');
+    const blogPosting = await blogPostingFor(
+      'starting-a-site-for-my-robotics-work',
+    );
 
     expect(blogPosting.image).toMatchObject({
-      url: `${SITE_URL}/images/writing/api-costs-july-2025.png`,
-      width: 1117,
-      height: 812,
+      url: `${SITE_URL}/images/writing/starting-a-site/system-overview.webp`,
+      width: 960,
+      height: 800,
       caption:
-        'Anthropic API costs for July 2025 showing $9,986.20 in token usage',
+        'The AerialSoftArm platform: quadrotor base, truss soft arm, wrist camera, two-finger gripper, and part stand.',
     });
   });
 
-  it('falls back to the post card for a post with no article image', async () => {
-    const blogPosting = await blogPostingFor('claude-code-outage');
+  it('falls back to the site card for a post with no article image', async () => {
+    // A draft never gets a generated card and has no article image, so its
+    // BlogPosting inherits the generic site card.
+    vi.stubEnv('NODE_ENV', 'development');
+    const blogPosting = await blogPostingFor(DRAFT_SLUG);
 
     expect(blogPosting.image).toMatchObject({
-      url: `${SITE_URL}/og/writing/claude-code-outage.png`,
+      url: `${SITE_URL}${SHARE_IMAGE_PATH}`,
       width: SHARE_IMAGE_DIMENSIONS.width,
       height: SHARE_IMAGE_DIMENSIONS.height,
     });

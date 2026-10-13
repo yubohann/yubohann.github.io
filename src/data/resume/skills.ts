@@ -13,111 +13,136 @@ const skills: Skill[] = [
   {
     title: 'Python',
     competency: 5,
-    category: ['Languages', 'ML Engineering'],
+    category: ['Languages', 'Robot Learning'],
   },
   {
-    title: 'TypeScript',
-    competency: 5,
-    category: ['Languages', 'Web Development'],
-  },
-  {
-    title: 'SQL',
+    title: 'C++',
     competency: 4,
-    category: ['Languages', 'Databases'],
-  },
-  // AI & LLM
-  {
-    title: 'AI Agents',
-    competency: 5,
-    category: ['ML Engineering'],
+    category: ['Languages', 'Robotics'],
   },
   {
-    title: 'LLM Evaluation',
-    competency: 5,
-    category: ['ML Engineering'],
+    title: 'MATLAB',
+    competency: 3,
+    category: ['Languages'],
   },
-  {
-    title: 'AI Red-teaming',
-    competency: 5,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'LLM APIs',
-    competency: 5,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'RAG',
-    competency: 4,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'Prompt Engineering',
-    competency: 4,
-    category: ['ML Engineering'],
-  },
-  {
-    title: 'Vector Databases',
-    competency: 4,
-    category: ['ML Engineering', 'Databases'],
-  },
+  // Robot Learning
   {
     title: 'PyTorch',
     competency: 4,
-    category: ['ML Engineering'],
+    category: ['Robot Learning'],
   },
   {
-    title: 'Pandas',
-    competency: 5,
-    category: ['ML Engineering', 'Data Engineering'],
-  },
-  // Web Development
-  {
-    title: 'Node.js',
-    competency: 5,
-    category: ['Web Development'],
-  },
-  {
-    title: 'FastAPI',
+    title: 'Stable-Baselines3',
     competency: 4,
-    category: ['Web Development'],
+    category: ['Robot Learning'],
   },
   {
-    title: 'Next.js',
-    competency: 3,
-    category: ['Web Development'],
-  },
-  // Databases
-  {
-    title: 'PostgreSQL',
+    title: 'Reinforcement Learning',
     competency: 4,
-    category: ['Databases'],
+    category: ['Robot Learning'],
   },
   {
-    title: 'Redis',
+    title: 'PPO',
+    competency: 4,
+    category: ['Robot Learning'],
+  },
+  {
+    title: 'SAC',
     competency: 3,
-    category: ['Databases'],
+    category: ['Robot Learning'],
+  },
+  {
+    title: 'Quality-Diversity (MAP-Elites)',
+    competency: 3,
+    category: ['Robot Learning'],
+  },
+  // Robotics
+  {
+    title: 'ROS 2',
+    competency: 4,
+    category: ['Robotics'],
+  },
+  {
+    title: 'Isaac Sim',
+    competency: 4,
+    category: ['Robotics'],
+  },
+  {
+    title: 'Isaac Lab',
+    competency: 4,
+    category: ['Robotics'],
+  },
+  {
+    title: 'MuJoCo',
+    competency: 4,
+    category: ['Robotics'],
+  },
+  {
+    title: 'Gazebo',
+    competency: 3,
+    category: ['Robotics'],
+  },
+  {
+    title: 'Nav2',
+    competency: 3,
+    category: ['Robotics'],
+  },
+  {
+    title: 'MoveIt 2',
+    competency: 3,
+    category: ['Robotics'],
+  },
+  // Perception
+  {
+    title: 'LiDAR',
+    competency: 4,
+    category: ['Perception'],
+  },
+  {
+    title: 'IMU',
+    competency: 4,
+    category: ['Perception'],
+  },
+  {
+    title: 'RGB-D',
+    competency: 3,
+    category: ['Perception'],
+  },
+  {
+    title: 'YOLO',
+    competency: 3,
+    category: ['Perception'],
+  },
+  {
+    title: 'AprilTag',
+    competency: 3,
+    category: ['Perception'],
+  },
+  {
+    title: 'PCL',
+    competency: 3,
+    category: ['Perception'],
   },
   // Infrastructure
   {
-    title: 'AWS',
+    title: 'Linux',
+    competency: 4,
+    category: ['Infrastructure'],
+  },
+  {
+    title: 'Git',
     competency: 4,
     category: ['Infrastructure'],
   },
   {
     title: 'Docker',
-    competency: 4,
-    category: ['Infrastructure'],
-  },
-  {
-    title: 'Kubernetes',
     competency: 3,
     category: ['Infrastructure'],
   },
   {
-    title: 'Observability',
-    competency: 4,
-    category: ['Infrastructure', 'ML Engineering'],
+    title: 'CI',
+    competency: 3,
+    category: ['Infrastructure'],
   },
 ].map((skill) => ({ ...skill, category: skill.category.sort() }));
 

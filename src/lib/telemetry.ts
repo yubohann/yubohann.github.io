@@ -7,17 +7,11 @@ import profile from '@/data/profile.json';
  * read the same values.
  */
 
-/** Birth instant, including Buffalo's UTC offset. */
+/** Birth instant, including the UTC offset of the birth place. */
 export const BIRTH_DATE = profile.birthDate;
 
 /** Milliseconds in an average Gregorian year. */
 export const MS_PER_YEAR = 1000 * 60 * 60 * 24 * 365.2421897;
-
-/** Year the first computer arrived in the bedroom. */
-export const COMPUTING_SINCE = profile.computingSince;
-
-/** Countries visited to date. */
-export const COUNTRIES_VISITED = profile.countriesVisited;
 
 /** Current home city. */
 export const CURRENT_CITY = profile.currentCity;
@@ -71,7 +65,7 @@ export const SHORT_SHA_LENGTH = 7;
  * This fallback is only for source links. It is never used to invent the
  * "Built from commit" reading.
  */
-export const DEFAULT_SOURCE_REPOSITORY = 'mldangelo/personal-site';
+export const DEFAULT_SOURCE_REPOSITORY = 'yubohann/yubohann.github.io';
 
 const COMMIT_SHA = /^[0-9a-f]{40}$/i;
 const REPOSITORY_NAME = /^[a-z0-9](?:[a-z0-9-]{0,38})\/[a-z0-9._-]{1,100}$/i;

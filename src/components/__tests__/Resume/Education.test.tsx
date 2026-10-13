@@ -6,16 +6,16 @@ import Degree from '../../Resume/Education/Degree';
 
 const mockDegrees = [
   {
-    school: 'Stanford University',
-    degree: 'M.S. Computer Science',
-    link: 'https://stanford.edu',
-    year: 2020,
+    school: 'Hubei University of Technology',
+    degree: 'B.Eng. Computer Science and Technology',
+    link: 'https://www.hbut.edu.cn',
+    year: 2027,
   },
   {
-    school: 'MIT',
-    degree: 'B.S. Computer Science',
-    link: 'https://mit.edu',
-    year: 2016,
+    school: 'Wuhan University',
+    degree: 'Exchange Program',
+    link: 'https://www.whu.edu.cn',
+    year: 2025,
   },
 ];
 
@@ -31,48 +31,50 @@ describe('Education', () => {
   it('renders all degrees', () => {
     render(<Education data={mockDegrees} />);
 
-    expect(screen.getByText('M.S. Computer Science')).toBeInTheDocument();
-    expect(screen.getByText('B.S. Computer Science')).toBeInTheDocument();
+    expect(
+      screen.getByText('B.Eng. Computer Science and Technology'),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Exchange Program')).toBeInTheDocument();
   });
 
   it('renders school links', () => {
     render(<Education data={mockDegrees} />);
 
-    const stanfordLink = screen.getByRole('link', { name: /stanford/i });
-    expect(stanfordLink).toHaveAttribute('href', 'https://stanford.edu');
+    const hbutLink = screen.getByRole('link', { name: /hubei/i });
+    expect(hbutLink).toHaveAttribute('href', 'https://www.hbut.edu.cn');
 
-    const mitLink = screen.getByRole('link', { name: /mit/i });
-    expect(mitLink).toHaveAttribute('href', 'https://mit.edu');
+    const wuhanLink = screen.getByRole('link', { name: /wuhan/i });
+    expect(wuhanLink).toHaveAttribute('href', 'https://www.whu.edu.cn');
   });
 });
 
 describe('Degree', () => {
   const mockDegree = {
-    school: 'Stanford University',
-    degree: 'M.S. Computer Science',
-    link: 'https://stanford.edu',
-    year: 2020,
+    school: 'Hubei University of Technology',
+    degree: 'B.Eng. Computer Science and Technology',
+    link: 'https://www.hbut.edu.cn',
+    year: 2027,
   };
 
   it('renders degree title', () => {
     render(<Degree data={mockDegree} />);
 
     expect(screen.getByRole('heading', { level: 3 })).toHaveTextContent(
-      'M.S. Computer Science',
+      'B.Eng. Computer Science and Technology',
     );
   });
 
   it('renders school name with link', () => {
     render(<Degree data={mockDegree} />);
 
-    const link = screen.getByRole('link', { name: /stanford/i });
-    expect(link).toHaveAttribute('href', 'https://stanford.edu');
+    const link = screen.getByRole('link', { name: /hubei/i });
+    expect(link).toHaveAttribute('href', 'https://www.hbut.edu.cn');
   });
 
   it('displays year', () => {
     render(<Degree data={mockDegree} />);
 
-    expect(screen.getByText(/2020/)).toBeInTheDocument();
+    expect(screen.getByText(/2027/)).toBeInTheDocument();
   });
 
   it('renders as article element', () => {

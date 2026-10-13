@@ -110,9 +110,9 @@ describe('PostContent figures', () => {
   });
 
   it('renders the published contributions qualification as a figure caption', () => {
-    const post = getPostBySlug('shipping-with-claude-code');
+    const post = getPostBySlug('starting-a-site-for-my-robotics-work');
     if (!post) {
-      throw new Error('expected shipping-with-claude-code to be published');
+      throw new Error('expected the launch post to be published');
     }
 
     const html = renderToStaticMarkup(
@@ -123,9 +123,9 @@ describe('PostContent figures', () => {
     );
 
     expect(html).toContain(
-      '<figcaption class="prose-figcaption">GitHub counts commits, pull requests, reviews, and issue activity here; I use the total as a rough proxy for output.</figcaption>',
+      '<figcaption class="prose-figcaption">The AerialSoftArm platform: quadrotor base, truss soft arm, wrist camera, two-finger gripper, and part stand.</figcaption>',
     );
-    expect(html).not.toContain('title="GitHub counts');
+    expect(html).not.toContain('title="The AerialSoftArm platform');
   });
 
   it('promotes a standalone image to a figure without emitting one inside a paragraph', () => {
@@ -443,47 +443,30 @@ describe('PostContent heading anchors', () => {
     }
   });
 
-  it('renders the real post whose headings the two schemes disagreed about', () => {
-    const post = getPostBySlug('shipping-with-claude-code');
-    if (!post) {
-      throw new Error('expected shipping-with-claude-code to be published');
-    }
-
+  it('renders a heading the two schemes disagree about through the canonical scheme', () => {
     const html = renderToStaticMarkup(
       <PostContent
-        content={post.content}
-        imageSizes={readPostImageSizes(post.content)}
+        content={'## On using `--dangerously-skip-permissions`\n'}
       />,
     );
 
     expect(headingIds(html)).toContain('on-using-dangerously-skip-permissions');
-    expect(headingIds(html)).toContain('claude-md-agents-md');
     expect(headingIds(html)).not.toContain(
       'on-using---dangerously-skip-permissions',
     );
   });
 
-  it('keeps the previously published ids resolving as hidden aliases', () => {
-    const post = getPostBySlug('shipping-with-claude-code');
-    if (!post) {
-      throw new Error('expected shipping-with-claude-code to be published');
-    }
-
+  it('keeps the library-scheme ids resolving as hidden aliases', () => {
     const html = renderToStaticMarkup(
       <PostContent
-        content={post.content}
-        imageSizes={readPostImageSizes(post.content)}
+        content={
+          '## CLAUDE.md & AGENTS.md\n\n## On using `--dangerously-skip-permissions`\n'
+        }
       />,
     );
 
-    expect(aliasIds(html).sort()).toEqual(
-      [
-        'browser-automation---chrome-for-interaction-playwright-mcp-for-screenshots',
-        'claudemd--agentsmd',
-        'on-using---dangerously-skip-permissions',
-        'plan-mode--writing-plans-to-files',
-      ].sort(),
-    );
+    expect(aliasIds(html)).toContain('claudemd--agentsmd');
+    expect(aliasIds(html)).toContain('on-using---dangerously-skip-permissions');
     expect(new Set(allIds(html)).size).toBe(allIds(html).length);
   });
 

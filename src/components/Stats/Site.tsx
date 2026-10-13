@@ -26,15 +26,17 @@ interface GitHubStatsResult {
 /**
  * Last-known upstream values for builds where the GitHub API is unavailable.
  * The rendered note identifies them as approximate and dates this snapshot.
+ * These start at zero because the repository is new; refresh them from the
+ * live API when a meaningful reading exists.
  *
- * Refreshed: 2026-07-31
+ * Refreshed: 2026-10-14
  */
 const FALLBACK_DATA: GitHubData = {
-  stargazers_count: 1663,
-  subscribers_count: 23,
-  forks: 979,
-  open_issues_count: 21,
-  pushed_at: '2026-07-31T15:44:18Z',
+  stargazers_count: 0,
+  subscribers_count: 0,
+  forks: 0,
+  open_issues_count: 0,
+  pushed_at: '2026-10-14T00:00:00Z',
 };
 
 /** Narrow untrusted JSON before any formatter can observe it. */
@@ -85,7 +87,7 @@ async function fetchGitHubStats(): Promise<GitHubStatsResult> {
   try {
     const token = process.env.GITHUB_TOKEN;
     const response = await fetch(
-      'https://api.github.com/repos/mldangelo/personal-site',
+      'https://api.github.com/repos/yubohann/yubohann.github.io',
       {
         headers: {
           Accept: 'application/vnd.github.v3+json',
@@ -151,8 +153,8 @@ export default async function SiteStats() {
       <Table data={data} />
       <p className="stats-source-note" data-source={source}>
         {source === 'github'
-          ? 'GitHub readings describe mldangelo/personal-site and were fetched at build time. Measured readings came from this build and its checkout.'
-          : 'GitHub API unavailable; approximate mldangelo/personal-site readings use the fallback refreshed July 31, 2026. Measured readings came from this build and its checkout.'}
+          ? 'GitHub readings describe yubohann/yubohann.github.io and were fetched at build time. Measured readings came from this build and its checkout.'
+          : 'GitHub API unavailable; approximate yubohann/yubohann.github.io readings use the fallback refreshed October 14, 2026. Measured readings came from this build and its checkout.'}
       </p>
     </>
   );
