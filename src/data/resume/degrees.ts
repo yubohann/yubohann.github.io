@@ -12,6 +12,12 @@ const degrees: Degree[] = [
     link: 'https://www.hbut.edu.cn',
     year: 2027,
   },
+  {
+    school: 'Zhejiang University',
+    degree: 'Micro-major in Artificial Intelligence (9 credits, 98/100)',
+    link: 'https://www.zju.edu.cn',
+    year: 2026,
+  },
 ];
 
 export default degrees;

@@ -85,15 +85,37 @@
 
 .project-entry {
   display: grid;
-  grid-template-columns: 9rem minmax(0, 1fr);
-  column-gap: 2rem;
-  padding: 1.5rem 0;
+  grid-template-columns: minmax(0, 1fr);
+  padding: 1.75rem 0;
   border-bottom: var(--rule) solid var(--color-border);
   color: inherit;
   text-decoration: none;
   /* base/links.css paints an accent underline on links in prose. */
   background-image: none;
   transition: background-color var(--duration-instant) var(--ease-out);
+}
+
+.project-entry--with-image {
+  grid-template-columns: minmax(0, 16.25rem) minmax(0, 1fr);
+  column-gap: 2rem;
+  align-items: start;
+}
+
+.project-entry-figure {
+  border: var(--rule) solid var(--color-border);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-out);
+}
+
+.project-entry-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+a.project-entry:hover .project-entry-figure,
+a.project-entry:focus-visible .project-entry-figure {
+  border-color: var(--color-fg-bold);
 }
 
 a.project-entry:hover,
@@ -106,10 +128,14 @@ a.project-entry:focus-visible .project-entry-title {
   color: var(--color-accent);
 }
 
+/* Dates and role sit on one meta line above the title, mirroring an archive
+   card's reading order rather than a narrow wrapping column. */
 .project-entry-meta {
-  grid-column: 1;
-  display: block;
-  padding-top: 0.4em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 0.9rem;
+  margin-bottom: 0.55rem;
 }
 
 /* Flex with a gap rather than a plain inline run: the separator between the
@@ -134,8 +160,6 @@ a.project-entry:focus-visible .project-entry-title {
    tracking rather than tone — the same treatment `.project-card-subtitle`
    gives the identical line on an archive card. */
 .project-entry-role {
-  display: block;
-  margin-top: 0.4rem;
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   font-weight: var(--font-weight-medium);
@@ -145,7 +169,6 @@ a.project-entry:focus-visible .project-entry-title {
 }
 
 .project-entry-body {
-  grid-column: 2;
   min-width: 0;
 }
 
@@ -207,26 +230,10 @@ a.project-entry:focus-visible .project-entry-external {
   color: var(--color-fg-light);
 }
 
-@media (max-width: 640px) {
-  .project-entry {
+@media (max-width: 720px) {
+  .project-entry--with-image {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .project-entry-meta {
-    padding-top: 0;
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: 0 0.75rem;
-  }
-
-  .project-entry-role {
-    margin-top: 0;
-  }
-
-  .project-entry-body {
-    grid-column: 1;
+    row-gap: 1rem;
   }
 }
 

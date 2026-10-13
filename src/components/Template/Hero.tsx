@@ -30,9 +30,10 @@ export default function Hero() {
 
           <p className="hero-summary">
             My work spans physics-grounded search benchmarks in Isaac Sim, graph
-            reinforcement learning for multi-robot navigation, world models, and
-            a rigid-soft arm that grasps by bending. I&apos;m seeking internship
-            and research roles in robotics and embodied AI.
+            reinforcement learning for multi-robot navigation, and a rigid-soft
+            arm that grasps by bending — with two first-author manuscripts in
+            submission. I&apos;m seeking internship and research roles in
+            robotics and embodied AI.
           </p>
 
           <div className="hero-cta">
@@ -42,6 +43,14 @@ export default function Hero() {
             <Link href="/resume" className="hero-resume-link">
               View resume
             </Link>
+            <a
+              href="https://github.com/yubohann"
+              className="hero-resume-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
           </div>
         </div>
 

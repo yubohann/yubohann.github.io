@@ -52,17 +52,26 @@ describe('projects page', () => {
   });
 
   /**
-   * The register has no artwork, and inventing some would be worse than going
-   * without: only archive entries that actually have a committed screenshot
-   * may render an image.
+   * Inventing art would be worse than going without: only entries that
+   * actually have a committed screenshot may render an image, and an entry
+   * with none keeps its image-free row.
    */
   it('renders an image only where one exists', () => {
     const { container } = render(<ProjectsPage />);
 
-    expect(container.querySelectorAll('.project-entry img')).toHaveLength(0);
+    expect(container.querySelectorAll('.project-entry img')).toHaveLength(
+      shipped.filter((project) => project.image).length,
+    );
     expect(container.querySelectorAll('.project-card img')).toHaveLength(
       archive.filter((project) => project.image).length,
     );
+
+    const imageless = shipped.find((project) => !project.image);
+    if (imageless) {
+      expect(
+        screen.getByRole('heading', { level: 3, name: imageless.title }),
+      ).toBeInTheDocument();
+    }
   });
 
   it('never renders a card that looks clickable but is not', () => {

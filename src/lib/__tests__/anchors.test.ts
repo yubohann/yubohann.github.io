@@ -34,6 +34,7 @@ describe('createHeadingId', () => {
     ).toEqual([
       ['Some History', 'some-history'],
       ['What I Work On', 'what-i-work-on'],
+      ['Honors', 'honors'],
       ['I Dream Of', 'i-dream-of'],
     ]);
   });

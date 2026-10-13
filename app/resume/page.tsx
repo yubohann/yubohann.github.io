@@ -87,8 +87,8 @@ export default function ResumePage() {
             Computer Science undergraduate at Hubei University of Technology,
             graduating in 2027, building multi-agent search benchmarks, graph
             reinforcement learning, world models, and a sim-to-real aerial
-            manipulator. First-author manuscript in preparation on multi-robot
-            exploration and geometry-constrained semantic allocation.
+            manipulator — with two first-author manuscripts in submission on
+            multi-robot navigation and prediction-informed control.
           </p>
           {/* Print-only, but real markup rather than CSS `content`, so it is
               selectable and linkable. Destinations come from shared contact

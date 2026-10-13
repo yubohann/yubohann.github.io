@@ -21,16 +21,19 @@ const work: Position[] = [
     position: 'Research Lead',
     url: 'https://github.com/yubohann/MultiAgent-Robotics-Portfolio',
     startDate: '2025-10-01',
-    summary: `Independent research on multi-robot cooperative exploration and target search. I designed and built a
-    physics-grounded multi-agent search benchmark captured in Isaac Sim with a fleet of CF2X quadrotors, graph
-    reinforcement learning for gate traversal and formation flight, world-model and quality-diversity methods for
-    HM3D-derived indoor exploration, and a sim-to-real aerial manipulator whose rigid-soft truss arm grasps by
-    bending. A first-author manuscript on multi-robot exploration and geometry-constrained semantic allocation is in
-    preparation. The project code ships in the
+    summary: `Independent research on multi-robot cooperative exploration and target search, with two first-author
+    manuscripts in submission: a three-level semantic injection framework for multi-robot object navigation (Robotics
+    and Autonomous Systems, Elsevier) and prediction-informed multi-agent MPC with uncertainty-aware world models
+    (Engineering Applications of Artificial Intelligence). I designed and built a physics-grounded multi-agent search
+    benchmark captured in Isaac Sim with a fleet of CF2X quadrotors, graph reinforcement learning for gate traversal
+    and formation flight, quality-diversity methods for HM3D-derived indoor exploration, and a sim-to-real aerial
+    manipulator whose rigid-soft truss arm grasps by bending. The project code ships in the
     <a href='https://github.com/yubohann/MultiAgent-Robotics-Portfolio'>public portfolio repository</a>.`,
     highlights: [
       'Owned the research line end to end: task contracts, simulation capture, estimators and control, baselines, and evidence documentation.',
-      'Maintained eight public project snapshots with per-project READMEs, tests, and frozen protocols in one portfolio repository.',
+      'Built a reproducible evaluation system that keeps policy-visible observations strictly separate from scorer truth, with protocols, code, and result hashes bound together.',
+      'Added an execution-time safety layer on top of learned coordination — kinematic limits, segment-level collision checks, and formation consistency — with 42 gate layouts × 10 seeds all collision-free.',
+      'Scaled the world-model line from a real two-drone match to swarms of fifty, and transferred it to urban traffic signal control: digital-twin calibration error 0.0053 and 41.1% recovery of perfect-prediction gains.',
       'Kept a CPU-only verification path for every benchmark and learning project so the work checks from a clean checkout.',
     ],
   },
@@ -42,11 +45,12 @@ const work: Position[] = [
     url: 'https://github.com/yubohann',
     startDate: '2026-05-01',
     endDate: '2026-07-31',
-    summary: `Built and tuned Isaac Lab training environments for a multi-drone research line: PPO training,
-    formation-aware observations, and obstacle-avoidance experiments.`,
+    summary: `Built and tuned Isaac Lab training environments for a multi-drone research line: PPO training across
+    multiple seeds (about 90,000 sampled steps), formation-aware observations, and obstacle-avoidance experiments,
+    monitored through 12 reward and constraint channels in TensorBoard.`,
     highlights: [
-      'Integrated flight dynamics, obstacle fields, and camera observations into a training environment.',
-      'Designed formation-aware observation and reward terms for multi-drone control; validated policies across difficulty levels.',
+      'Integrated flight dynamics, randomized obstacle fields, and onboard sensor observations into a parallelizable training environment.',
+      'Designed formation-aware observation and reward terms — formation keeping, inter-drone safety distance, and altitude limits — with collisions, out-of-bounds, and attitude loss as terminations; validated policies across obstacle densities.',
     ],
   },
   {
@@ -69,11 +73,13 @@ const work: Position[] = [
     startDate: '2023-09-01',
     endDate: '2025-10-31',
     summary: `LiDAR-inertial localisation and perception for a competition basketball robot, carried through two
-    seasons of ROBOCON. The public stack covers the Livox MID-360 and FAST-LIO2 pipeline, a Gazebo court simulation,
-    ROS 2 integration for navigation, and the handoff to the embedded-control side.`,
+    seasons of ROBOCON (two national second prizes, and a national first prize for the team's bionic-legged entry).
+    The public stack covers the Livox MID-360 and FAST-LIO2 pipeline, a Gazebo court simulation, ROS 2 integration
+    for navigation, and the handoff to the embedded-control side.`,
     highlights: [
+      'Defined a unified pose interface with triple quality gating (freshness, degeneration, jumps) across lidar-inertial localisation, mapping, and fixed-map localisation, so navigation and shooting share one trustworthy pose; validated in simulation first, then migrated to the real robot.',
       'Built the simulation-first autonomy stack: Gazebo court, LiDAR and RGB-D models, and a scripted scoring routine that smoke-tests locally.',
-      'Integrated point-cloud registration, 2D projection, and occupancy mapping interfaces consumed by the navigation side.',
+      'Modelled the ball trajectory with gravity, drag, and Magnus effects, calibrating the distance-to-launch-speed mapping with simulated annealing; handled on-court depth drift with triangulation fallback and fence re-anchoring.',
       'Coordinated the interface between the ROS 2 navigation stack and the embedded control layer during competition integration.',
     ],
   },

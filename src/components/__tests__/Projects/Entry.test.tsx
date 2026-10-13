@@ -31,11 +31,24 @@ describe('Entry', () => {
     );
   });
 
-  /** No screenshots exist for this work; the row must not want one. */
+  /** An entry with no committed screenshot must not want one. */
   it('renders no image', () => {
     render(<Entry data={base} />);
 
     expect(document.querySelector('img')).not.toBeInTheDocument();
+  });
+
+  it('leads with the screenshot when one exists', () => {
+    render(
+      <Entry data={{ ...base, image: '/images/projects/rivermark.webp' }} />,
+    );
+
+    const figure = document.querySelector('.project-entry--with-image');
+    expect(figure).toBeInTheDocument();
+    expect(figure?.querySelector('.project-entry-figure img')).toHaveAttribute(
+      'src',
+      expect.stringContaining('rivermark.webp'),
+    );
   });
 
   it('renders the title, role, description, and tech', () => {

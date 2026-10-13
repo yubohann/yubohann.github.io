@@ -65,6 +65,7 @@ const data: Project[] = [
     subtitle: 'Independent research · sim-to-real aerial manipulation',
     link: 'https://github.com/yubohann/AerialSoftArm',
     sourceWork: 'Independent Research',
+    image: '/images/projects/aerial-soft-arm.webp',
     date: '2026-09-01',
     ongoing: true,
     desc: 'A quadrotor carrying a rigid-soft truss arm that grasps by bending: the base freezes after a coarse pose, a bend-Jacobian visual servo owns the final centimetres, and two fingers must sustain contact before the part is lifted. Ships with MuJoCo hardware models, a keyboard operation panel, and a calibration export for the real rig.',
@@ -72,10 +73,21 @@ const data: Project[] = [
     status: 'shipped',
   },
   {
+    title: 'Prediction-Informed Multi-Agent MPC',
+    subtitle: 'Independent research · first-author paper in submission',
+    sourceWork: 'Independent Research',
+    date: '2025-10-01',
+    ongoing: true,
+    desc: 'Decision-focused learning and uncertainty-aware world models for adversarial multi-robot play: object-centric beliefs, a probabilistic ensemble that predicts rule risks beyond state, and a three-layer decision stack — flow-based candidate generation, CVaR-MPC screening, and a rule shield. Scales from a real two-drone match to swarms of fifty, and transfers to urban traffic signal control (digital-twin calibration error 0.0053, recovering 41.1% of perfect-prediction gains).',
+    tech: ['World models', 'MPC', 'CVaR'],
+    status: 'shipped',
+  },
+  {
     title: 'AeroCityBench',
     subtitle: 'Independent research · benchmark infrastructure',
     link: 'https://github.com/yubohann/AeroCityBench',
     sourceWork: 'Independent Research',
+    image: '/images/projects/aerocity-bench.webp',
     date: '2026-02-01',
     endDate: '2026-09-30',
     desc: 'An open, physics-grounded benchmark for multi-UAV target search under urban topology, target-process, and fleet-resilience shifts: procedural cities, a public task contract, scorer-private target truth, and confirmation that requires a legal observation in flight.',
@@ -89,7 +101,7 @@ const data: Project[] = [
     sourceWork: 'Independent Research',
     date: '2025-12-01',
     endDate: '2026-09-30',
-    desc: 'A fixed-altitude drone-racing environment with single-agent, variable-fleet, and dynamic gate-density tasks: graph observations, A-star routing, virtual-structure formation, an action safety shield, and graph-RL training paths that run on CPU.',
+    desc: 'A fixed-altitude drone-racing environment with single-agent, variable-fleet, and dynamic gate-density tasks: graph observations, A-star routing, virtual-structure formation, and an execution-time safety layer — kinematic limits, segment-level collision checks, formation consistency — that held zero collisions across 42 gate layouts × 10 seeds.',
     tech: ['Graph RL', 'Formation control', 'Safety shields'],
     status: 'shipped',
   },
@@ -109,6 +121,7 @@ const data: Project[] = [
     subtitle: 'Independent research · exploration and quality-diversity',
     link: 'https://github.com/yubohann/hm3d-realised-qd',
     sourceWork: 'Independent Research',
+    image: '/images/projects/hm3d-realised-qd.webp',
     date: '2026-03-01',
     endDate: '2026-09-30',
     desc: 'Outcome-grounded quality-diversity and reinforcement learning for multi-UAV exploration in HM3D-derived scenes: a shared belief, team plans chosen from a common candidate pool, and behavioural diversity that comes only from execution receipts.',
@@ -120,6 +133,7 @@ const data: Project[] = [
     subtitle: 'Independent research · benchmark infrastructure',
     link: 'https://github.com/yubohann/MultiAgent-Robotics-Portfolio/tree/main/rivermark',
     sourceWork: 'Independent Research',
+    image: '/images/projects/rivermark.webp',
     date: '2025-10-01',
     endDate: '2026-09-30',
     desc: 'A physics-grounded benchmark toolchain for multi-agent three-dimensional search, built on native Isaac Sim captures of a fleet of CF2X quadrotors in a procedural City-Lite scene. Episodes bind scene, protocol, runtime, and source revision to identity contracts, and target truth stays scorer-side.',
@@ -131,6 +145,7 @@ const data: Project[] = [
     subtitle: 'LiDAR and perception lead · ROBOCON',
     link: 'https://github.com/yubohann/MultiAgent-Robotics-Portfolio/tree/main/robocon-mid360-autonomy-stack',
     sourceWork: 'ROBOCON Robotics Team',
+    image: '/images/projects/robocon-mid360-autonomy-stack.webp',
     date: '2024-06-01',
     endDate: '2025-10-31',
     desc: 'A simulation-first ROS 2 autonomy stack for a competition basketball robot — Livox MID-360 and FAST-LIO2 localisation, a Gazebo court simulation, navigation interfaces, and the embedded-control handoff.',
@@ -142,6 +157,7 @@ const data: Project[] = [
     subtitle: 'Team lead · RoboCup China 2025',
     link: 'https://github.com/yubohann/MultiAgent-Robotics-Portfolio/tree/main/robocup-cbg-wm',
     sourceWork: 'RoboCup China 2025',
+    image: '/images/projects/robocup-cbg-wm.webp',
     date: '2025-03-01',
     endDate: '2025-10-31',
     desc: 'World models and risk-aware control for adversarial multi-robot navigation, grown from the visual-challenge entry at RoboCup China 2025: counterfactual belief graphs, replayable simulated matches, and a rule environment that tests control stacks under competition constraints.',
@@ -234,6 +250,17 @@ export default data;
 
 /** The register: selected work, most recent first. */
 export const shipped = data.filter((project) => project.status === 'shipped');
+
+/**
+ * The homepage preview: flagship entries that have artwork, in register
+ * order. Curated by title rather than sliced from `shipped` so adding a new
+ * flagship does not silently push one of these off the homepage.
+ */
+const FEATURED_TITLES = ['AerialSoftArm', 'Rivermark', 'AeroCityBench'];
+
+export const featured = FEATURED_TITLES.map((title) =>
+  data.find((project) => project.title === title),
+).filter((project): project is Project => Boolean(project?.image));
 
 /** Coursework and earlier systems work, most recent first. */
 export const archive = data.filter((project) => project.status === 'archive');

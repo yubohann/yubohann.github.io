@@ -24,6 +24,11 @@ describe('about data', () => {
     expect(aboutMarkdown).toContain('Multi-agent search');
   });
 
+  it('contains the honors section', () => {
+    expect(aboutMarkdown).toContain('# Honors');
+    expect(aboutMarkdown).toContain('RoboCup China 2025');
+  });
+
   it('contains the dreams section', () => {
     expect(aboutMarkdown).toContain('# I Dream Of');
     expect(aboutMarkdown).toContain('Staying curious');
