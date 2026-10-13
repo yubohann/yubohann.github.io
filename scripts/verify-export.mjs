@@ -433,12 +433,28 @@ const REQUIRED_SOCIAL_META = [
   ['property', 'og:image'],
   ['property', 'og:image:alt'],
   ['name', 'twitter:card'],
-  ['name', 'twitter:site'],
-  ['name', 'twitter:creator'],
   ['name', 'twitter:title'],
   ['name', 'twitter:description'],
   ['name', 'twitter:image'],
 ];
+
+/**
+ * twitter:site and twitter:creator are emitted only when the site configures
+ * a social handle. When any page in the export carries one of them, every
+ * indexable page must carry exactly one of each; when none does, their
+ * absence is the configured state rather than a defect — the same rule the
+ * empty-value check below has always applied to the always-on tags.
+ */
+const HANDLE_SOCIAL_META = [
+  ['name', 'twitter:site'],
+  ['name', 'twitter:creator'],
+];
+
+const handleDeclared = records.some(
+  (record) =>
+    metaValues(record.html, 'name', 'twitter:site').length > 0 ||
+    metaValues(record.html, 'name', 'twitter:creator').length > 0,
+);
 
 for (const record of records) {
   const { directives, html, ids, isIndexable, relativePath, robots, route } =
@@ -468,6 +484,20 @@ for (const record of records) {
         );
       } else if (!values[0].trim()) {
         fail(relativePath, `${name} must not be empty`);
+      }
+    }
+
+    for (const [key, name] of HANDLE_SOCIAL_META) {
+      const values = metaValues(html, key, name);
+      if (values.length > 1) {
+        fail(
+          relativePath,
+          `indexable page has ${values.length} ${name} tags; expected 1`,
+        );
+      } else if (values.length === 1 && !values[0].trim()) {
+        fail(relativePath, `${name} must not be empty`);
+      } else if (values.length === 0 && handleDeclared) {
+        fail(relativePath, `indexable page has 0 ${name} tags; expected 1`);
       }
     }
   }
