@@ -25,9 +25,11 @@ const work: Position[] = [
     manuscripts in submission: a three-level semantic injection framework for multi-robot object navigation (Robotics
     and Autonomous Systems, Elsevier) and prediction-informed multi-agent MPC with uncertainty-aware world models
     (Engineering Applications of Artificial Intelligence). I designed and built a physics-grounded multi-agent search
-    benchmark captured in Isaac Sim with a fleet of CF2X quadrotors, graph reinforcement learning for gate traversal
-    and formation flight, quality-diversity methods for HM3D-derived indoor exploration, and a sim-to-real aerial
-    manipulator whose rigid-soft truss arm grasps by bending. The project code ships in the
+    benchmark captured in Isaac Sim with a fleet of CF2X quadrotors, graph reinforcement learning and BC/DAgger
+    imitation for gate traversal and formation flight, quality-diversity methods for HM3D-derived indoor exploration,
+    and an aerial manipulator validated in high-fidelity simulation whose rigid-soft truss arm grasps by bending. I
+    also reproduced and audited the Co-NavGPT2 vision-language navigation baseline in Habitat, with open-vocabulary
+    detector diagnostics. The project code ships in the
     <a href='https://github.com/yubohann/MultiAgent-Robotics-Portfolio'>public portfolio repository</a>.`,
     highlights: [
       'Owned the research line end to end: task contracts, simulation capture, estimators and control, baselines, and evidence documentation.',

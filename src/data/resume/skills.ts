@@ -56,6 +56,26 @@ const skills: Skill[] = [
     competency: 3,
     category: ['Robot Learning'],
   },
+  {
+    title: 'Imitation learning (BC/DAgger)',
+    competency: 3,
+    category: ['Robot Learning'],
+  },
+  {
+    title: 'Graph RL',
+    competency: 3,
+    category: ['Robot Learning'],
+  },
+  {
+    title: 'World models',
+    competency: 3,
+    category: ['Robot Learning'],
+  },
+  {
+    title: 'Vision-language models',
+    competency: 3,
+    category: ['Robot Learning'],
+  },
   // Robotics
   {
     title: 'ROS 2',
@@ -79,6 +99,11 @@ const skills: Skill[] = [
   },
   {
     title: 'Gazebo',
+    competency: 3,
+    category: ['Robotics'],
+  },
+  {
+    title: 'Habitat',
     competency: 3,
     category: ['Robotics'],
   },

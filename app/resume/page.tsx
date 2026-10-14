@@ -20,7 +20,7 @@ import { AUTHOR_NAME, SITE_URL } from '@/lib/utils';
 
 const resumeMetadata = createPageMetadata({
   title: 'Resume',
-  description: `${AUTHOR_NAME}'s Resume. Multi-agent robotics, robot learning, ROS 2, and sim-to-real aerial manipulation.`,
+  description: `${AUTHOR_NAME}'s Resume. Multi-agent robotics, robot learning, ROS 2, and aerial manipulation in high-fidelity simulation.`,
   path: '/resume/',
 });
 
@@ -86,9 +86,10 @@ export default function ResumePage() {
             teams, independent research, and engineering internships. I&apos;m a
             Computer Science undergraduate at Hubei University of Technology,
             graduating in 2027, building multi-agent search benchmarks, graph
-            reinforcement learning, world models, and a sim-to-real aerial
-            manipulator — with two first-author manuscripts in submission on
-            multi-robot navigation and prediction-informed control.
+            reinforcement learning, world models, and an aerial soft-arm
+            manipulator validated in high-fidelity simulation — with two
+            first-author manuscripts in submission on multi-robot navigation and
+            prediction-informed control.
           </p>
           {/* Print-only, but real markup rather than CSS `content`, so it is
               selectable and linkable. Destinations come from shared contact

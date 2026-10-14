@@ -62,14 +62,15 @@ export interface Project {
 const data: Project[] = [
   {
     title: 'AerialSoftArm',
-    subtitle: 'Independent research · sim-to-real aerial manipulation',
+    subtitle:
+      'Independent research · aerial manipulation · high-fidelity simulation',
     link: 'https://github.com/yubohann/AerialSoftArm',
     sourceWork: 'Independent Research',
     image: '/images/projects/aerial-soft-arm.webp',
     date: '2026-09-01',
     ongoing: true,
-    desc: 'A quadrotor carrying a rigid-soft truss arm that grasps by bending: the base freezes after a coarse pose, a bend-Jacobian visual servo owns the final centimetres, and two fingers must sustain contact before the part is lifted. Ships with MuJoCo hardware models, a keyboard operation panel, and a calibration export for the real rig.',
-    tech: ['Isaac Lab', 'MuJoCo', 'Visual servoing', 'Sim-to-real'],
+    desc: 'A quadrotor carrying a rigid-soft truss arm that grasps by bending: the base freezes after a coarse pose, a bend-Jacobian visual servo owns the final centimetres, and two fingers must sustain contact before the part is lifted. The full pipeline is validated in high-fidelity simulation (Isaac Lab physics, MuJoCo hardware models); it ships a keyboard operation panel and calibration and command-stream tooling for the physical rig.',
+    tech: ['Isaac Lab', 'MuJoCo', 'Visual servoing', 'Sim-to-real tooling'],
     status: 'shipped',
   },
   {
@@ -90,7 +91,7 @@ const data: Project[] = [
     image: '/images/projects/aerocity-bench.webp',
     date: '2026-02-01',
     endDate: '2026-09-30',
-    desc: 'An open, physics-grounded benchmark for multi-UAV target search under urban topology, target-process, and fleet-resilience shifts: procedural cities, a public task contract, scorer-private target truth, and confirmation that requires a legal observation in flight.',
+    desc: 'A self-built, open-source benchmark for multi-UAV target search under urban topology, target-process, and fleet-resilience shifts: procedural cities, a public task contract, scorer-private target truth, and confirmation that requires a legal observation in flight.',
     tech: ['Multi-UAV', 'Procedural generation', 'Benchmark design'],
     status: 'shipped',
   },
@@ -101,8 +102,8 @@ const data: Project[] = [
     sourceWork: 'Independent Research',
     date: '2025-12-01',
     endDate: '2026-09-30',
-    desc: 'A fixed-altitude drone-racing environment with single-agent, variable-fleet, and dynamic gate-density tasks: graph observations, A-star routing, virtual-structure formation, and an execution-time safety layer — kinematic limits, segment-level collision checks, formation consistency — that held zero collisions across 42 gate layouts × 10 seeds.',
-    tech: ['Graph RL', 'Formation control', 'Safety shields'],
+    desc: 'A fixed-altitude drone-racing environment with single-agent, variable-fleet, and dynamic gate-density tasks: graph observations, A-star routing, virtual-structure formation, expert-guided imitation (BC + DAgger), and an execution-time safety layer — kinematic limits, segment-level collision checks, formation consistency — that held zero collisions across 42 gate layouts × 10 seeds.',
+    tech: ['Graph RL', 'Imitation learning', 'Safety shields'],
     status: 'shipped',
   },
   {
@@ -136,7 +137,7 @@ const data: Project[] = [
     image: '/images/projects/rivermark.webp',
     date: '2025-10-01',
     endDate: '2026-09-30',
-    desc: 'A physics-grounded benchmark toolchain for multi-agent three-dimensional search, built on native Isaac Sim captures of a fleet of CF2X quadrotors in a procedural City-Lite scene. Episodes bind scene, protocol, runtime, and source revision to identity contracts, and target truth stays scorer-side.',
+    desc: 'A self-built benchmark toolchain for multi-agent three-dimensional search, built on native Isaac Sim captures of a fleet of CF2X quadrotors in a procedural City-Lite scene. Episodes bind scene, protocol, runtime, and source revision to identity contracts, and target truth stays scorer-side.',
     tech: ['Isaac Sim', 'Benchmark design', 'Multi-agent systems'],
     status: 'shipped',
   },

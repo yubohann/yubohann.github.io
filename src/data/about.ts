@@ -1,6 +1,6 @@
 export const aboutMarkdown = `# Intro
 
-I am a Computer Science undergraduate at [Hubei University of Technology](https://www.hbut.edu.cn), graduating in June 2027. I build robot systems: physics-grounded search benchmarks, graph reinforcement learning, world models, and a sim-to-real aerial manipulator that grasps by bending — with two first-author manuscripts in submission.
+I am a Computer Science undergraduate at [Hubei University of Technology](https://www.hbut.edu.cn), graduating in June 2027. I build robot systems: physics-grounded search benchmarks, graph reinforcement learning, world models, and an aerial manipulator that grasps by bending in high-fidelity simulation — with two first-author manuscripts in submission.
 
 Almost everything I build ships in one public portfolio — [MultiAgent-Robotics-Portfolio](https://github.com/yubohann/MultiAgent-Robotics-Portfolio) — where each project carries its own README, source tree, tests, and evidence notes. I care about the unglamorous parts of robotics research: reproducible capture, honest evidence boundaries, and writing down what actually ran.
 
@@ -16,9 +16,9 @@ I am currently looking for internship and research-engineering roles in robotics
 
 # What I Work On
 
-- **Multi-agent search.** A physics-grounded benchmark for multi-UAV target search, captured natively in Isaac Sim, with frozen protocols and scorer-side target truth.
-- **Learning for robots.** Graph reinforcement learning for gate traversal and formation flight, quality-diversity archives driven by execution receipts, and world models for adversarial navigation.
-- **Sim-to-real manipulation.** A rigid-soft truss arm that aligns by bending while the base holds still — MuJoCo hardware models, tendon coupling, and calibration export for the real rig.
+- **Multi-agent search.** A self-built physics-grounded benchmark for multi-UAV target search, captured natively in Isaac Sim, with frozen protocols and scorer-side target truth.
+- **Learning for robots.** Graph reinforcement learning and BC/DAgger imitation for gate traversal and formation flight, vision-language navigation baselines (Co-NavGPT2) with open-vocabulary detection, quality-diversity archives driven by execution receipts, and world models for adversarial navigation.
+- **Aerial manipulation.** A rigid-soft truss arm that aligns by bending while the base holds still — validated in high-fidelity simulation, with MuJoCo hardware models, tendon coupling, and calibration tooling for the physical rig.
 - **Writing it down.** A structured ROS 2 engineering handbook and per-project evidence documentation, because a result is only a result when its run, data, and configuration are traceable.
 
 # Honors

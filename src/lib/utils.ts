@@ -34,7 +34,7 @@ export const SHARE_IMAGE_DIMENSIONS = {
 
 // Canonical one-line bio, shared across page metadata, OpenGraph, and JSON-LD.
 export const SITE_DESCRIPTION =
-  'Computer Science undergraduate at Hubei University of Technology, building multi-agent robotics benchmarks, robot-learning systems, and a sim-to-real aerial manipulator.';
+  'Computer Science undergraduate at Hubei University of Technology, building multi-agent robotics benchmarks, robot-learning systems, and an aerial manipulator validated in high-fidelity simulation.';
 
 // Image dimension constants
 export const PROJECT_IMAGE = {

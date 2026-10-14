@@ -23,17 +23,16 @@ export default function Hero() {
               href="https://github.com/yubohann/AerialSoftArm"
               className="hero-highlight"
             >
-              sim-to-real aerial manipulator
+              rigid-soft aerial manipulator
             </a>
             .
           </p>
 
           <p className="hero-summary">
-            My work spans physics-grounded search benchmarks in Isaac Sim, graph
-            reinforcement learning for multi-robot navigation, and a rigid-soft
-            arm that grasps by bending — with two first-author manuscripts in
-            submission. I&apos;m seeking internship and research roles in
-            robotics and embodied AI.
+            My work spans physics-grounded search benchmarks, robot learning and
+            VLM navigation baselines, and a rigid-soft aerial arm that grasps by
+            bending — with two first-author manuscripts in submission. I&apos;m
+            seeking internship and research roles in robotics and embodied AI.
           </p>
 
           <div className="hero-cta">

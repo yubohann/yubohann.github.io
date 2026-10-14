@@ -2,7 +2,8 @@
 
 The source for [yubohann.github.io](https://yubohann.github.io), a portfolio,
 résumé, and writing site for my robotics work — multi-agent search benchmarks,
-graph reinforcement learning, world models, and sim-to-real aerial manipulation.
+graph reinforcement learning, world models, and aerial manipulation in
+high-fidelity simulation.
 
 The code home for the projects is
 [MultiAgent-Robotics-Portfolio](https://github.com/yubohann/MultiAgent-Robotics-Portfolio);

@@ -28,7 +28,7 @@ describe('Hero', () => {
     expect(universityLink).toHaveClass('hero-highlight');
 
     const armLink = screen.getByRole('link', {
-      name: /sim-to-real aerial manipulator/i,
+      name: /rigid-soft aerial manipulator/i,
     });
     expect(armLink).toHaveAttribute(
       'href',
@@ -37,10 +37,10 @@ describe('Hero', () => {
     expect(armLink).toHaveClass('hero-highlight');
 
     expect(container.querySelector('.hero-tagline')).toHaveTextContent(
-      "I'm a Computer Science undergraduate at Hubei University of Technology, building multi-agent robot systems and a sim-to-real aerial manipulator.",
+      "I'm a Computer Science undergraduate at Hubei University of Technology, building multi-agent robot systems and a rigid-soft aerial manipulator.",
     );
     expect(container.querySelector('.hero-summary')).toHaveTextContent(
-      'My work spans physics-grounded search benchmarks in Isaac Sim',
+      'My work spans physics-grounded search benchmarks, robot learning',
     );
   });
 
